@@ -14,7 +14,8 @@ import CategorySelectedPage from './pages/CategorySelectedPage'
 import QueryPage from './pages/QueryPage'
 
 
-axios.defaults.baseURL = 'http://localhost:3030/'
+//axios.defaults.baseURL = 'http://localhost:3030/'
+axios.defaults.baseURL = 'https://scouterscout.onrender.com/'
 axios.defaults.withCredentials = true
 
 function App() {
