@@ -1,0 +1,243 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body{
+  @apply bg-[#F0EFED] text-gray-800 overflow-x-hidden ;
+}
+
+input[type='text'], input[type='password'], input[type='email'], input[type='number'], input[type='tel'], select, textarea{
+  @apply p-2 bg-white text-gray-800 rounded w-full md:min-w-[300px] min-w-[200px] ;
+}
+
+select{
+  @apply cursor-pointer border-2 border-gray-800;
+}
+
+
+.site_title{
+  @apply md:text-4xl text-sm italic;
+}
+
+.user_menu{
+  position: fixed;
+  z-index: 100;
+  @apply rounded-b-lg border border-gray-800 shadow-md bg-[#F0EFED] ;
+}
+
+.user_menu > li{ 
+  @apply text-center border-b-2 border-gray-300 text-indigo-500 py-2;
+}
+
+.primary_btn{
+  @apply bg-blue-500 text-white font-bold md:p-2 p-1 mt-4 rounded;
+}
+
+.primary_red_btn{
+  @apply bg-red-500 text-white font-bold md:p-2 p-1 mt-4 rounded;
+}
+
+.secondary_btn{
+  @apply bg-white text-indigo-500 border border-indigo-500 md:p-2 p-1 rounded mt-4;
+}
+
+.secondary_btn, .primary_btn{
+  @apply cursor-pointer hover:bg-indigo-50;
+}
+
+.primary_btn:hover{
+  @apply bg-blue-600;
+}
+
+.input_div{
+  @apply flex flex-col gap-2   py-1 px-1;
+}
+
+.input_div > label{
+  @apply md:text-lg md:font-bold text-sm;
+}
+
+.profiel_item{
+  @apply bg-gray-700 md:py-2 md:px-4 py-1 px-2 ;
+}
+
+.profiel_item:hover{
+  @apply opacity-80 cursor-pointer;
+}
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0 !important;
+}
+
+input[type=number] {
+  -moz-appearance: textfield !important;
+}
+
+.category_selected p{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.channel_component{
+  @apply py-1 px-2 flex gap-7 cursor-pointer border-b;
+}
+
+.box{
+	width: 80vh;
+	height: 80vh;
+	/* border: solid black; */
+	margin: auto;
+	position: relative;
+	display: block;
+}
+
+.center{
+	padding-top: 50%;
+}
+
+.dialog-1{
+  	height: 20%;
+  	width: 40%;
+  	background-color: var(--main-dark-color);
+  	position: absolute;
+  	border-radius: 10%;
+}
+
+.left-point{
+	width: 0;
+	height: 0;
+	border-left: 2vh solid transparent;
+	border-right: 2vh solid transparent;
+	border-top: 10vh solid var(--main-dark-color);
+	position: absolute;
+	top: 45%;
+	left: -10%;
+	transform: rotate(60deg);
+}
+
+.dialog-2{
+  	height: 20%;
+  	width: 40%;
+  	background-color: var(--main-light-color);
+  	position: absolute;
+  	border-radius: 10%;
+  	right: 0;
+}
+
+.right-point{
+	width: 0;
+	height: 0;
+	border-left: 2vh solid transparent;
+	border-right: 2vh solid transparent;
+	border-top: 10vh solid var(--main-light-color);
+	position: absolute;
+	top: 45%;
+	right: -10%;
+	transform: rotate(-60deg);
+}
+
+.chat {
+	--rad: 20px;
+	--rad-sm: 3px;
+	font: 14px/1.5 sans-serif;
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	max-width: 800px;
+	margin: auto;
+  }
+  
+  .msg {
+	position: relative;
+	max-width: 100%;
+	padding: 7px 15px;
+	margin-bottom: 2px;
+  }
+  
+  .msg.sent {
+	border-radius: var(--rad) var(--rad-sm) var(--rad-sm) var(--rad);
+	background: #007bff;
+	color: #fff;
+	/* moves it to the right */
+	margin-left: auto;
+  }
+  
+  .msg.rcvd {
+	border-radius: var(--rad-sm) var(--rad) var(--rad) var(--rad-sm);
+	background: white;
+	color: #555;
+	/* moves it to the left */
+	margin-right: auto;
+  }
+  
+  /* Improve radius for messages group */
+  
+  .msg.sent:first-child,
+  .msg.rcvd+.msg.sent {
+	border-top-right-radius: var(--rad);
+  }
+  
+  .msg.rcvd:first-child,
+  .msg.sent+.msg.rcvd {
+	border-top-left-radius: var(--rad);
+  }
+  
+  
+  /* time */
+  
+  .msg::before {
+	content: attr(data-time);
+	font-size: 0.8rem;
+	position: absolute;
+	bottom: 100%;
+	color: #888;
+	white-space: nowrap;
+	/* Hidden by default */
+	display: none;
+  }
+  
+  .msg.sent::before {
+	right: 15px;
+  }
+  
+  .msg.rcvd::before {
+	left: 15px;
+  }
+  
+  
+  /* Show time only for first message in group */
+  
+  .msg:first-child::before,
+  .msg.sent+.msg.rcvd::before,
+  .msg.rcvd+.msg.sent::before {
+	/* Show only for first message in group */
+	display: block;
+  }
+
+.mobile_navbar > :first-child {
+  @apply text-center w-full h-full flex justify-center items-center  text-indigo-500 py-2;
+}
+
+.mobile_navbar > :nth-child(2) {
+  @apply text-center w-full h-full flex justify-center items-center  text-indigo-500 py-2;
+}
+
+.mobile_navbar > :nth-child(3) {
+  @apply text-center w-full h-full flex justify-center items-center  text-indigo-500 py-2;
+}
+
+.mobile_navbar > :nth-child(4) {
+  @apply text-center w-full h-full flex justify-center items-center  text-indigo-500 py-2;
+}
+
+.mobile_navbar > :nth-child(5) {
+  @apply text-center w-full h-full flex justify-center items-center  text-indigo-500 py-2;
+}
