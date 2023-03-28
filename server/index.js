@@ -19,11 +19,14 @@ app.use(bodyParser.json({
     parameterLimit: 100000,
     extended: true 
   }));
-
+//accept multiple origins
 app.use(cors({
     credentials: true,
-    origin: 'http://localhost:5173'
+    origin: ['http://localhost:5173', 'https://6423209e92c8ad006798b1bb--bejewelled-centaur-26079f.netlify.app']
+
 }));
+
+app.use(cors())
 app.use( express.json());
 
 const AuthRoute = require('./routes/AuthRoute.js');
