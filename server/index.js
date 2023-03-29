@@ -19,12 +19,18 @@ app.use(bodyParser.json({
     parameterLimit: 100000,
     extended: true 
   }));
-//accept multiple origins
 app.use(cors({
     credentials: true,
     origin: ['http://localhost:5173', 'https://6423209e92c8ad006798b1bb--bejewelled-centaur-26079f.netlify.app']
 
 }));
+
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
 
 app.use(cors())
 app.use( express.json());
