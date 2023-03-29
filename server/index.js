@@ -23,15 +23,9 @@ app.use(bodyParser.json({
 
 app.use(cors({
     credentials: true,
-    origin: ['http://localhost:5173', 'https://earnest-buttercream-9053f8.netlify.app/']
+    origin: 'http://localhost:5173'
 }));
 
-
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
 
 app.use( express.json());
 
