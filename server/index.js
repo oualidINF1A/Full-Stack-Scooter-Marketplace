@@ -19,10 +19,11 @@ app.use(bodyParser.json({
     parameterLimit: 100000,
     extended: true 
   }));
+
+
 app.use(cors({
     credentials: true,
-    origin: ['http://localhost:5173', 'https://6423209e92c8ad006798b1bb--bejewelled-centaur-26079f.netlify.app']
-
+    origin: ['http://localhost:5173', 'https://earnest-buttercream-9053f8.netlify.app/']
 }));
 
 
@@ -32,7 +33,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(cors())
 app.use( express.json());
 
 const AuthRoute = require('./routes/AuthRoute.js');
