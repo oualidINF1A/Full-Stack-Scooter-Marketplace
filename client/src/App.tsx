@@ -15,6 +15,7 @@ import QueryPage from './pages/QueryPage'
 
 
 axios.defaults.baseURL = 'http://localhost:3030/'
+axios.defaults.baseURL = import.meta.env.VITE_AXIOS_BASE_URL
 axios.defaults.withCredentials = true
 
 function App() {
