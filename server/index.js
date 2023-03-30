@@ -33,7 +33,7 @@ const AuthRoute = require('./routes/AuthRoute.js');
 const AdvertRoute = require('./routes/AdvertRoute.js');
 const MessageRoute = require('./routes/BerichtenRoute.js');
 
-app.get('/checkZipCode/:zipCode/:houseNumber', async (req, res) => {
+app.get('/server/checkZipCode/:zipCode/:houseNumber', async (req, res) => {
     const zipCode = req.params.zipCode;
     const houseNumber = req.params.houseNumber;
     try{
@@ -55,9 +55,9 @@ app.get('/checkZipCode/:zipCode/:houseNumber', async (req, res) => {
 
 
 
-app.use('/advert',AdvertRoute )
-app.use('/auth', AuthRoute);
-app.use('/berichten', MessageRoute);
+app.use('/server/advert',AdvertRoute )
+app.use('/server/auth', AuthRoute);
+app.use('/server/berichten', MessageRoute);
 
 
 app.listen(process.env.SERVER_PORT, () => {
