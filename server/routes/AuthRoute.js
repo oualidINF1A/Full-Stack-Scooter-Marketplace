@@ -3,16 +3,17 @@ const express = require('express');
 const bcrypt = require('bcryptjs'); 
 
 const mongoose = require('mongoose');
-mongoose.set('strictQuery', true)
 
 dotenv.config();
 const router = express.Router();
 
-mongoose.connect(`${process.env.MONGOOSE_URL}`);
 
 const User = require('../models/UserModel.js');
 
 router.post('/register', async (req, res) => {
+    mongoose.connect(`${process.env.MONGOOSE_URL}`);
+    mongoose.set('strictQuery', true)
+
     const data = req.body;
     try{
         bcrypt.hash(data.password, 10).then(
@@ -33,6 +34,8 @@ router.post('/register', async (req, res) => {
 }); 
 
 router.put('/update', async (req, res) => {
+    mongoose.connect(`${process.env.MONGOOSE_URL}`);
+    mongoose.set('strictQuery', true)
     const {newName, newEmail,_id} = req.body;
     try{
         const userDoc = await User.findById(_id);
@@ -49,6 +52,8 @@ router.put('/update', async (req, res) => {
 });
  
 router.post('/login', async (req, res) => { 
+    mongoose.connect(`${process.env.MONGOOSE_URL}`);
+    mongoose.set('strictQuery', true)
     const {email, password} = req.body;
     const userDoc = await User.findOne({email:email});
     if(userDoc){

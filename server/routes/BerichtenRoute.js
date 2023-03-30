@@ -2,12 +2,10 @@ const dotenv = require('dotenv');
 const express = require('express');
 
 const mongoose = require('mongoose');
-mongoose.set('strictQuery', true)
 
 dotenv.config();
 const router = express.Router();
 
-mongoose.connect(`${process.env.MONGOOSE_URL}`);
 
 const Channel = require('../models/ChannelModel.js');
 const Message = require('../models/MessageModel.js');
@@ -15,6 +13,8 @@ const Advert = require('../models/AdvertModel.js');
 const User = require('../models/UserModel.js');
 
 router.post('/createChannel', async (req, res) => {
+    mongoose.connect(`${process.env.MONGOOSE_URL}`);
+    mongoose.set('strictQuery', true)
     const {advertId, userId} = req.body;
     if(!advertId || !userId) return res.status(400).json({message: 'Missing parameters'});
     try {
@@ -36,6 +36,8 @@ router.post('/createChannel', async (req, res) => {
 });
 
 router.get('/channels/:id', async (req, res) => {
+    mongoose.connect(`${process.env.MONGOOSE_URL}`);
+    mongoose.set('strictQuery', true)
     const {id} = req.params;
     if(!id) return res.status(400).json({message: 'Missing parameters'});
     try {
@@ -75,6 +77,8 @@ router.get('/channels/:id', async (req, res) => {
 });
 
 router.post(`/newmessage/:id`, async (req, res) => {
+    mongoose.connect(`${process.env.MONGOOSE_URL}`);
+    mongoose.set('strictQuery', true)
     const {id:channelId} = req.params;
     const {message, userId} = req.body;
     if(!channelId || !message || !userId) return res.status(400).json({message: 'Missing parameters'});
@@ -102,6 +106,8 @@ router.post(`/newmessage/:id`, async (req, res) => {
 });
 
 router.get('/unreadChannels/:id', async (req, res) => {
+    mongoose.connect(`${process.env.MONGOOSE_URL}`);
+    mongoose.set('strictQuery', true)
     const {id} = req.params;
     if(!id) return res.status(400).json({message: 'Missing parameters'});
     try {
@@ -115,6 +121,8 @@ router.get('/unreadChannels/:id', async (req, res) => {
 });
 
 router.post('/readmessages', async (req, res) => {
+    mongoose.connect(`${process.env.MONGOOSE_URL}`);
+    mongoose.set('strictQuery', true)
     const {userId} = req.body;
     if(!userId) return res.status(400).json({message: 'Missing parameters'});
     const userDoc = await User.findById(userId);

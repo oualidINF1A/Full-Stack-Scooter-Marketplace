@@ -11,9 +11,6 @@ cloudinary.config({
   
 const mongoose = require('mongoose');
 
-mongoose.set('strictQuery', true)
-mongoose.connect(`${process.env.MONGOOSE_URL}`);
-
 const Advert = require('../models/AdvertModel.js');
 const Scooter = require('../models/ScooterModel.js');
 const User = require('../models/UserModel.js');
@@ -24,6 +21,8 @@ const router = express.Router();
 
 
 router.post('/new' , async (req, res) => {
+    mongoose.set('strictQuery', true)
+    mongoose.connect(`${process.env.MONGOOSE_URL}`);
     const {
     ownerId,
     title,
@@ -68,6 +67,8 @@ router.post('/new' , async (req, res) => {
 })
 
 router.put('/update/:id', async (req, res) => {
+    mongoose.set('strictQuery', true)
+    mongoose.connect(`${process.env.MONGOOSE_URL}`);
     const { id } = req.params;
     if(!id) return res.status(400).json({succes:false, msg:'No id provided'});
     const {
@@ -126,6 +127,8 @@ router.put('/update/:id', async (req, res) => {
 });
 
 router.get('/userAdverts/:id', async (req, res) => {
+    mongoose.set('strictQuery', true)
+    mongoose.connect(`${process.env.MONGOOSE_URL}`);
     const { id } = req.params;
     if(!id) return res.status(400).json({succes:false, msg:'No id provided'});
     try {
@@ -143,6 +146,8 @@ router.get('/userAdverts/:id', async (req, res) => {
 }); 
 
 router.get('/delete/:id', async (req, res) => {
+    mongoose.set('strictQuery', true)
+    mongoose.connect(`${process.env.MONGOOSE_URL}`);
     const { id } = req.params;
     if(!id) return res.status(400).json({succes:false, msg:'No id provided'});
     try {
@@ -158,6 +163,8 @@ router.get('/delete/:id', async (req, res) => {
 });
 
 router.get('/advert/:id', async (req, res) => {
+    mongoose.set('strictQuery', true)
+    mongoose.connect(`${process.env.MONGOOSE_URL}`);
     const { id } = req.params;
     if(!id) return res.status(400).json({succes:false, msg:'No id provided'}) ;
     try {
@@ -175,6 +182,8 @@ router.get('/advert/:id', async (req, res) => {
 });
 
 router.post('/all', async (req, res) => {
+    mongoose.set('strictQuery', true)
+    mongoose.connect(`${process.env.MONGOOSE_URL}`);
     const {skip} = req.body;
     try {
         const adverts = await Advert.find().
@@ -192,6 +201,8 @@ router.post('/all', async (req, res) => {
 });
 
 router.put('/advert/save', async (req, res) => {
+    mongoose.set('strictQuery', true)
+    mongoose.connect(`${process.env.MONGOOSE_URL}`);
     const {advertId, userId} = req.body;
     if(!advertId || !userId) return res.status(400).json({succes:false, msg:'No id provided'});
     try {
@@ -218,6 +229,8 @@ router.put('/advert/save', async (req, res) => {
 });
 
 router.get('/saved/:id', async (req, res) => {
+    mongoose.set('strictQuery', true)
+    mongoose.connect(`${process.env.MONGOOSE_URL}`);
     const { id } = req.params;
     if(!id) return res.status(400).json({succes:false, msg:'No id provided'});
     try{
@@ -230,6 +243,8 @@ router.get('/saved/:id', async (req, res) => {
 });
 
 router.post('/favorites/delete', async (req, res) => {
+    mongoose.set('strictQuery', true)
+    mongoose.connect(`${process.env.MONGOOSE_URL}`);
     const {advertId, userId} = req.body;
     if(!advertId) return res.status(400).json({succes:false, msg:'No id provided'});
     if(!userId) return res.status(400).json({succes:false, msg:'No id provided'});
@@ -249,6 +264,8 @@ router.post('/favorites/delete', async (req, res) => {
 });
 
 router.get(`/adverts/:brand/:model`, async (req, res) => {
+    mongoose.set('strictQuery', true)
+    mongoose.connect(`${process.env.MONGOOSE_URL}`);
     const { brand, model } = req.params;
     if(!brand || !model) return res.status(400).json({succes:false, msg:'No brand or model provided'});
     try {
@@ -267,6 +284,8 @@ router.get(`/adverts/:brand/:model`, async (req, res) => {
 });
 
 router.get('/query/:query', async (req, res) => {
+    mongoose.set('strictQuery', true)
+    mongoose.connect(`${process.env.MONGOOSE_URL}`);
     const { query } = req.params;
     if(!query) return res.status(400).json({succes:false, msg:'No query provided'});
     try {
@@ -284,6 +303,8 @@ router.get('/query/:query', async (req, res) => {
 });
 
 router.put('/advert/newOffer', async (req, res) => {
+    mongoose.set('strictQuery', true)
+    mongoose.connect(`${process.env.MONGOOSE_URL}`);
     const {advertId, userId, offer} = req.body;
     if(!advertId || !userId || !offer) return res.status(400).json({succes:false, msg:'No id provided'});
     try {
@@ -299,6 +320,8 @@ router.put('/advert/newOffer', async (req, res) => {
 });
 
 router.get('/advert/offers/:id', async (req, res) => {
+    mongoose.set('strictQuery', true)
+    mongoose.connect(`${process.env.MONGOOSE_URL}`);
     const { id:advertId } = req.params;
     if(!advertId) return res.status(400).json({succes:false, msg:'No id provided'});
     try {
@@ -319,6 +342,8 @@ router.get('/advert/offers/:id', async (req, res) => {
 }); 
 
 router.post('/delete/offer/:id', async (req, res) => {
+    mongoose.set('strictQuery', true)
+    mongoose.connect(`${process.env.MONGOOSE_URL}`);
     const { id:offerId } = req.params;
     const {advertId} = req.body;
     if(!offerId) return res.status(400).json({succes:false, msg:'No id provided'});

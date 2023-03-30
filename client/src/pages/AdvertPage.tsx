@@ -225,10 +225,11 @@ ${user.name}.
     )
 
     if(!user._id) return (
-        <div className='flex justify-center items-center w-screen h-screen -mt-16'>
-            <TailSpin color='gray' height={100} width={100} />
+        <div className='flex justify-center items-center'>
+            Je moet ingelogd zijn om deze pagina te kunnen bekijken.
         </div>
     )
+
     async function validateDutchZipCode(zipCode: string): Promise<boolean> {
         const url = `https://api.postcodes.io/postcodes/${zipCode}`;
         const response = await fetch(url);

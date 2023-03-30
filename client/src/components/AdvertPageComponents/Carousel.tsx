@@ -40,7 +40,7 @@ export default function Carousel({
     <div className="overflow-hidden relative rounded-xl bg-gray-200 border">
       <div
         className="flex transition-transform ease-out duration-500"
-        style={{ transform: `translateX(-${curr * (100+ curr)}%)` }}
+        style={{ transform: `translateX(-${curr * 100}%)` }}
       >
         {slides}
       </div>
