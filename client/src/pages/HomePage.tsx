@@ -66,7 +66,8 @@ const HomePage = ({categories}:Props) => {
   const [loading, setLoading] = useState(false)
   const [dataLoaded, setDataLoaded] = useState(false)
   const [fetchingMorePosts, setFetchingMorePosts] = useState(false)
-  const [skip, setSkip] = useState(1)
+  const loadingAdverts = [...Array(15)]
+  const [skip, setSkip] = useState(0)
 
   const fetchMorePosts = async () => {
     setSkip(skip + adverts.length)
@@ -89,6 +90,7 @@ const HomePage = ({categories}:Props) => {
     if(!res.data.succes) return
 
     setAdverts(res.data.adverts) 
+    setSkip(res.data.adverts.length)
     setLoading(false)
     setDataLoaded(true)
 
@@ -101,14 +103,34 @@ const HomePage = ({categories}:Props) => {
   }, [])
 
   if(loading) return (
-  <div className='w-screen flex justify-center mt-32'>
-    <TailSpin color='gray' height={100} width={100} />
-  </div>
+    <div className='flex flex-col gap-4'>
+      <div className='w-screen flex mt-24'>
+          <div className='w-full flex mx-8 justify-center -mt-24 '>
+            <SearchBar/>
+          </div>
+            <div id='homepage_adverts' 
+              className='w-full min-w-[300px] lg:left-72 left-0 max-w-fit right-0 px-8 flex-wrap flex gap-4 lg:border-l-2 border-gray-400 overflow-auto absolute'>
+                {loadingAdverts.map((_, index) => (
+                  <div key={index}>
+                          <div className=' bg-white shadow-md w-fit py-2 px-2 lg:min-w-[220px] lg:h-[220px] 
+                          flex flex-col gap-2
+                          h-[150px] min-w-[150px]'>
+                            <div className='w-full lg:h-[150px] h-[100px] bg-gray-300'/>
+                            <h1 className='bg-gray-200 h-[50px] w-full'></h1>
+                        </div>
+                  </div>
+                ))}
+            </div>
+      </div>
+    </div>
+
   )
   return (
     <div className='flex flex-col gap-4'>
-
+      
+      <div className='w-full flex mx-8 justify-center'>
         <SearchBar/>
+      </div>
 
       <div className='flex md:flex-row gap-2 px-4 pb-32'>
         <div className=' lg:block hidden'>

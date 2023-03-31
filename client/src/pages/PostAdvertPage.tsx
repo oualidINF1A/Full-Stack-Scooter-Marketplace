@@ -100,6 +100,8 @@ const PostAdvertPage = ({categories}:Props) => {
   const [finishedShowCity, setFinishedShowCity] = useState<boolean>(true)
   const [finishedProvince, setFinishedProvince] = useState<string>('')
   const [finishedHouseNumber, setFinishedHouseNumber] = useState<number | string>('')
+  const [finishedLongitude, setFinishedLongitude] = useState<number>(0)
+  const [finishedLatitude, setFinishedLatitude] = useState<number>(0)
 
   const [extraInfo, setExtraInfo] = useState<ExtraInfo | null>(null)
 
@@ -133,8 +135,6 @@ const PostAdvertPage = ({categories}:Props) => {
     setSelectedModel(advert.scooter.model)
   }, [])
 
-
-
   const handleModelSelected = () => {
     if (selectedModel === '') return
     setCurrentShow(2)
@@ -146,7 +146,8 @@ const PostAdvertPage = ({categories}:Props) => {
     // CHECK IF ANY INPUT IS EMPTY
     if (finishedOfferPrice === '' || finishedPhone === '' || finishedZipCode === '' || finishedTitle === ''
       || finishedDescription === '' || finishedImages.length == 0 || extraInfo == null || finishedPrice === ''
-      || selectedBrand === '' || selectedModel === '' || finishedCity === '' || finishedProvince === ''
+      || selectedBrand === '' || selectedModel === '' || finishedCity === '' || finishedProvince === '' || finishedHouseNumber === '' || 
+      finishedLongitude === 0 || finishedLatitude === 0
     ) return
     setUploading(true)
     if(toUpdate && advert._id) {
@@ -161,6 +162,8 @@ const PostAdvertPage = ({categories}:Props) => {
         showContactInfo: finishedShowContactInfo,
         zipCode: finishedZipCode,
         showCity:finishedShowCity,
+        longitude: finishedLongitude,
+        latitude: finishedLatitude,
         houseNumber: finishedHouseNumber,
         city: finishedCity,
         province: finishedProvince,
@@ -189,6 +192,8 @@ const PostAdvertPage = ({categories}:Props) => {
       showContactInfo: finishedShowContactInfo,
       zipCode: finishedZipCode,
       city: finishedCity,
+      longitude: finishedLongitude,
+      latitude: finishedLatitude,
       houseNumber: finishedHouseNumber,
       showCity:finishedShowCity,
       province: finishedProvince,
@@ -300,7 +305,8 @@ const PostAdvertPage = ({categories}:Props) => {
             finishedZipCode={finishedZipCode} finishedCity={finishedCity} setFinishedCity={setFinishedCity}
             finishedProvince={finishedProvince} setFinishedProvince={setFinishedProvince} finishedHouseNumber={finishedHouseNumber}
             setFinishedHouseNumber={setFinishedHouseNumber} finishedShowContactInfo={finishedShowContactInfo} setFinishedShowContactInfo={setFinishedShowContactInfo}
-            finishedShowCity={finishedShowCity} setFinishedShowCity={setFinishedShowCity} toUpdate={toUpdate}
+            finishedShowCity={finishedShowCity} setFinishedShowCity={setFinishedShowCity} toUpdate={toUpdate} 
+            setFinishedLongitude={setFinishedLongitude} setFinishedLatitude={setFinishedLatitude}
 
           />
         )}

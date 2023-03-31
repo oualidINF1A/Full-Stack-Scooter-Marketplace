@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import SelectedPageAdComponent from '../components/SelectedCategoryComponents/SelectedPageAdComponent'
 import SearchBar from '../components/HomePageComponents/SearchBar'
 import { TailSpin } from 'react-loader-spinner'
+import { useLocation } from 'react-router-dom'
 interface User{
     name?: string,
     email?: string,
@@ -43,10 +44,12 @@ const QueryPage = () => {
     const [currSort, setCurrSort] = useState<string>('populair')
     const [noAdverts, setNoAdverts] = useState<boolean>(true)
     const [loading, setLoading] = useState<boolean>(false)
+    const {city} = useLocation().state as {city: string}
+
 
     const getAdverts = async () => {
         setLoading(true)
-        const res = await axios.get(`/advert/query/${query}`)
+        const res = await axios.get(`/advert/query/${query}/${city}`)
         if(!res.data.succes) return
         setLoading(false)
         setAdverts(res.data.adverts)
@@ -60,11 +63,9 @@ const QueryPage = () => {
     useEffect(() => {
         if(!query) return
         getAdverts()
-    },[query])
+    },[city])
 
-    //Todo sort adverts by price, date, popularity
     useEffect(() => {
-      console.log(currSort)
       switch(currSort){
         case 'populair':
           setAdverts(adverts.sort((a,b) => b.saves.length - a.saves.length))
@@ -90,7 +91,8 @@ const QueryPage = () => {
       return (
         <div className='w-full h-screen flex flex-col gap-4 items-center mt-16'>
           <SearchBar/>
-          <h1 className='text-2xl font-semibold'>Geen advertenties gevonden voor: {query}</h1>
+          <h1 className='text-2xl font-semibold'>Geen advertenties gevonden voor: {query} 
+          {city !== "none" && ` in ${city}`}</h1>
         </div>
       )
     }

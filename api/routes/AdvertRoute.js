@@ -34,6 +34,8 @@ router.post('/new' , async (req, res) => {
     showContactInfo,
     zipCode,
     city,
+    longitude,
+    latitude,
     houseNumber,
     showCity,
     province,
@@ -55,7 +57,11 @@ router.post('/new' , async (req, res) => {
 
         const advertDoc = await Advert.create({
             owner: ownerId, title, description:description+` ${scooterDoc.brand} ${scooterDoc.model}`, price, offerPrice, images:newImages, phone, 
-            showContactInfo,showCity,zipCode,city,province,houseNumber ,scooter: scooterDoc._id
+            showContactInfo,showCity,zipCode,city,
+            location:{
+                type: 'Point',
+                coordinates: [longitude, latitude]
+            }, province,houseNumber ,scooter: scooterDoc._id
         }).catch(err => console.log(err));
         res.json({succes:true, advert:advertDoc});
 
@@ -82,6 +88,8 @@ router.put('/update/:id', async (req, res) => {
         zipCode,
         houseNumber,
         city,
+        longitude,
+        latitude,
         province,
         showCity,
         brand,
@@ -110,6 +118,10 @@ router.put('/update/:id', async (req, res) => {
         scooter.brand = brand;
         scooter.model = model;
         advert.city = city;
+        advert.location = {
+            type: 'Point',
+            coordinates: [longitude, latitude]
+        };
         advert.province = province;
         advert.houseNumber = houseNumber;
         scooter.condition = extraInfo.condition;
@@ -283,20 +295,28 @@ router.get(`/adverts/:brand/:model`, async (req, res) => {
     }
 });
 
-router.get('/query/:query', async (req, res) => {
+router.get('/query/:query/:city', async (req, res) => {
     mongoose.set('strictQuery', true)
     mongoose.connect(`${process.env.MONGOOSE_URL}`);
-    const { query } = req.params;
+    const { query, city } = req.params;
     if(!query) return res.status(400).json({succes:false, msg:'No query provided'});
     try {
-        const adverts = await Advert.find({$text:{$search:query}}).populate('scooter').populate({
-            path: 'owner',
-            model: 'User',
-            select: 'name email'
-        }).exec();  
-    res.json({succes:true, adverts});
+        if(city === "none"){
+            const adverts = await Advert.find({$text:{$search:query}}).populate('scooter').populate({
+                path: 'owner',
+                model: 'User',
+                select: 'name email'
+            }).exec();
+        res.json({succes:true, adverts});
 
-
+        }else{
+            const adverts = await Advert.find({$text:{$search:query},
+                city:city.charAt(0).toUpperCase() + city.slice(1)
+            }).populate('scooter').populate({
+                path: 'owner'
+                }).exec();
+            res.json({succes:true, adverts});    
+        }
     } catch (error) {
         console.log(error)
     }

@@ -15,6 +15,8 @@ interface Props {
   setFinishedHouseNumber: React.Dispatch<React.SetStateAction<number | string>>
   setFinishedShowContactInfo: React.Dispatch<React.SetStateAction<boolean>>
   setFinishedShowCity: React.Dispatch<React.SetStateAction<boolean>>
+  setFinishedLongitude: React.Dispatch<React.SetStateAction<number>>
+  setFinishedLatitude: React.Dispatch<React.SetStateAction<number>>
   finishedShowContactInfo: boolean
   finishedShowCity: boolean
   finishedPhone: string
@@ -28,7 +30,7 @@ interface Props {
 }
 
 const PhoneAndZipCode = ({ setCurrentShow, setFinishedPhone, setFinishedZipCode, currentShow, finishedPhone, finishedZipCode
-, setFinishedCity, setFinishedProvince, finishedCity, finishedProvince, finishedHouseNumber, setFinishedHouseNumber,
+, setFinishedCity, setFinishedProvince, setFinishedLatitude, setFinishedLongitude, finishedHouseNumber, setFinishedHouseNumber,
 setFinishedShowContactInfo, setFinishedShowCity, finishedShowContactInfo, finishedShowCity, toUpdate=false }: Props) => {
 
   const { user } = useContext(userContext)
@@ -59,8 +61,6 @@ setFinishedShowContactInfo, setFinishedShowCity, finishedShowContactInfo, finish
     if(finishedHouseNumber) {
       console.log(finishedHouseNumber)
       setHouseNumber(finishedHouseNumber)
-    }else{
-      console.log('no house number')
     }
     if(finishedShowContactInfo) {
       setShowContactInfo(finishedShowContactInfo)
@@ -137,6 +137,8 @@ setFinishedShowContactInfo, setFinishedShowCity, finishedShowContactInfo, finish
     if(result.data.success){
       setCity(result.data.data.city)
       setProvince(result.data.data.province)
+      setFinishedLatitude(result.data.data.latitude)
+      setFinishedLongitude(result.data.data.longitude)
     }else{
       setZipCodeError(true)
       setTimeout(() => {

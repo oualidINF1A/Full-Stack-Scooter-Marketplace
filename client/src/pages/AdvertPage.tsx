@@ -409,8 +409,62 @@ ${user.name}.
             </div>
             <div className='border-t-4 py-2'>
                     <article className='prose lg:prose-xl'>{advert.description}</article>
-
             </div>
+
+        </div>
+                    {/**Bieden gedeelte */}
+         <div className='px-2 py-4 bg-white max-w-[515px] min-w-[300px] flex flex-col gap-1 h-fit'>
+                        {notLoggedInError && <ErrorMessage text='U moet ingelogd zijn om te kunnen bieden'/>}
+                        {offerTooLowError && <ErrorMessage text='Bod moet hoger zijn dan minimaal bod'/>}
+                        {offerLowerThanLast && <ErrorMessage text='Bod moet hoger zijn dan laatste bod.'/>}
+                        {alreadyHighestBidderError && <ErrorMessage text='U bent al de hoogste bieder.'/>}
+
+                        <h1 className='lg:text-lg text-md font-semibold'>{user._id !== advert.owner._id ? 
+                        'Bieden' : 'Biedingen'    
+                    }</h1>
+                        <span className='text-gray-600 border-b'>Min: {
+                                new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' }).format(advert.offerPrice)
+                            }</span>
+
+                        {user._id !== advert?.owner._id && (
+                            <>
+                            <div>
+                                <div className='border border-black flex items-center px-1'>
+                                    <span className='text-gray-500 font-bold'>€</span>
+                                    <input type="tel" name="price" className='border-none w-full outline-none'
+                                        placeholder='0'
+                                        value={bidPrice}
+                                        onChange={(e) => handlePriceChange(e)}
+                                    />
+                                </div>
+                            </div>
+
+
+                            <button className='secondary_btn flex w-full items-center justify-center gap-4 font-semibold' 
+                                onClick={handleNewOffer}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className='w-4 h-4 fill-indigo-500'>
+                                        <path d="M318.6 9.4c-12.5-12.5-32.8-12.5-45.3 0l-120 120c-12.5 12.5-12.5 32.8 0 45.3l16 16c12.5 12.5 32.8 12.5 45.3 0l4-4L325.4 293.4l-4 4c-12.5 12.5-12.5 32.8 0 45.3l16 16c12.5 12.5 32.8 12.5 45.3 0l120-120c12.5-12.5 12.5-32.8 0-45.3l-16-16c-12.5-12.5-32.8-12.5-45.3 0l-4 4L330.6 74.6l4-4c12.5-12.5 12.5-32.8 0-45.3l-16-16zm-152 288c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l48 48c12.5 12.5 32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-1.4-1.4L272 285.3 226.7 240 168 298.7l-1.4-1.4z"/>
+                                    </svg>
+                                    
+                                    Plaats bod
+                                </button>
+                            </>
+
+                        )}
+
+                        {offersLoading && (
+                            <TailSpin color='gray' />
+                        )}
+
+                        {offers.length > 0 && !offersLoading && (
+                        <div className='flex flex-col gap-2 mt-2'>
+                            {offers.map((offer, index) => (
+                                <OfferComponent key={index} offer={offer} isOwner={user._id === advert.owner._id} 
+                                user={user} advert={advert} setOffers={setOffers}/>
+                            ))}
+                        </div>
+                        )}
+
 
         </div>
 
