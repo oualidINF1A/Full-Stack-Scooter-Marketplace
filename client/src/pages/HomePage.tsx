@@ -128,7 +128,7 @@ const HomePage = ({categories}:Props) => {
   return (
     <div className='flex flex-col gap-4'>
       
-      <div className='w-full flex mx-8 justify-center'>
+      <div className='w-full flex md:mx-8 justify-center'>
         <SearchBar/>
       </div>
 
@@ -139,7 +139,7 @@ const HomePage = ({categories}:Props) => {
         
         <div>
           <div id='homepage_adverts' 
-          className='w-full min-w-[300px] lg:left-72 left-0 max-w-fit right-0 px-8 flex-wrap flex gap-4 lg:border-l-2 border-gray-400 overflow-auto absolute'>
+          className='w-full min-w-[300px] lg:left-72 left-0 max-w-fit right-0 px-8 flex-wrap flex lg:gap-4 gap-2 lg:border-l-2 border-gray-400 overflow-auto absolute'>
             {adverts.map((advert, index) => (
               <HomePageAd key={index} advert={advert} />
             ))}

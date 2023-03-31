@@ -229,7 +229,7 @@ const PostAdvertPage = ({categories}:Props) => {
   )
 
   return (
-    <div className='w-full h-full flex flex-col gap-8 m-4 items-center justify-center'>
+    <div className='w-full h-full flex flex-col gap-8 md:m-4 items-center justify-center'>
       <h1 className='md:text-4xl text-xl'>Plaats je advertentie.</h1>
 
       <div className='md:w-2/3 w-1/3 min-w-fit p-8 flex flex-col gap-4 bg-white rounded-lg shadow-md'>

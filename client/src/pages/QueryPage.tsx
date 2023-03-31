@@ -99,8 +99,9 @@ const QueryPage = () => {
 
   return (
     <div className='w-full flex justify-center category_selected'>
-    <div className='w-2/3 flex flex-col'>
-        <SearchBar/>
+    <div className='w-full flex justify-center flex-col'>
+      <div className='ml-16'>
+      <SearchBar/>
         {adverts.length > 0 && (
             <div className='flex gap-2 mb-4'>
 
@@ -121,10 +122,14 @@ const QueryPage = () => {
             
             </div>
         )}
+      </div>
 
-    {adverts.map((advert: Advert, index:number) => (
+
+    <div className='w-full'>
+    {adverts.map((advert: Advert) => (
         <SelectedPageAdComponent advert={advert} key={advert._id}/>
     ))}
+    </div>
     </div>
 
 </div>

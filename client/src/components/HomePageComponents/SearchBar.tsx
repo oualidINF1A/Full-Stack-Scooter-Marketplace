@@ -61,40 +61,41 @@ const SearchBar = () => {
 
 
   return (
-    <div className='w-2/3 flex flex-col py-2'>
+    <div className='lg:w-2/3 w-full lg:text-sm text-xs  flex flex-col py-2'>
         {cityError && <ErrorMessage text='Ongeldige stad' />}
 
         <div className='w-full flex items-end'>
           <input placeholder='Welk soort scooter ben je op zoek?' 
-          className='border w-full rounded-none outline-indigo-500 border-y border-l border-indigo-500
+          className='border w-full  rounded-none outline-indigo-500 border-y border-l border-indigo-500
           h-[40px] px-2'
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           />
+
           <div className='w-[150px]'>
-          <input id="zip" name="zip" inputMode="numeric"
-            className={'outline-indigo-500 border-y  border-indigo-500 h-[40px] w-full border-r-none rounded-none'}
-            value={city} onChange={onCityChange}
-            placeholder="Stad"
-            
-          />
-          {city && (
-            <div className={`dropdown relative z-40 
-            ${citySuggestions.length == 0 && 'hidden'}`}>
-            <div className='dropdown-content'>
-              {citySuggestions.map((city, index) => (
-                <div key={index} className='dropdown_item' onClick={() => {
-                  setcity(city)
-                  setCitySuggestions([])
-                }}>{city}</div>
-              ))}
-          </div>
-          </div>
-          )}
+            <input type="text" inputMode="numeric"
+              className={'outline-indigo-500 border-y border-indigo-500 h-[40px]  border-r-none rounded-none'}
+              value={city} onChange={onCityChange}
+              placeholder="Stad"
+              
+            />
+            {city && (
+              <div className={`dropdown relative z-40 w-[150px]  
+              ${citySuggestions.length == 0 && 'hidden'}`}>
+              <div className='dropdown-content'>
+                {citySuggestions.map((city, index) => (
+                  <div key={index} className='dropdown_item' onClick={() => {
+                    setcity(city)
+                    setCitySuggestions([])
+                  }}>{city}</div>
+                ))}
+            </div>
+            </div>
+            )}
 
           </div>
 
-          <button className='primary_btn w-[150px] h-[40px] border border-indigo-500 border-r-none rounded-none' 
+          <button className='primary_btn w-[100px] h-[40px] border border-indigo-500 border-r-none rounded-none' 
           onClick={handleSearch}
           >Zoek</button>
         </div>

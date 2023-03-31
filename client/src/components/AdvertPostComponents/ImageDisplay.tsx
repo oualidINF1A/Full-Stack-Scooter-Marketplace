@@ -10,7 +10,7 @@ const ImageDisplay = ({images, setImages}:Props) => {
 
   return (
     <div className='mt-2'>
-        <div className='flex gap-4 mx-auto'>
+        <div className='flex md:flex-row flex-col gap-4 mx-auto'>
 
             {images[0] ? (
                 <img src={images[0]} alt="image" className='h-40 w-40 object-cover'/>

@@ -22,6 +22,7 @@ const Navbar = () => {
   return (
     <div className='absolute top-0'> 
         <div className='w-screen h-fit md:min-h-[80px] min-h-[100px] flex justify-center'>
+            {/**DESKTOP NAVBAR */}
             <nav className='w-full md:flex-row justify-around pb-2 absolute bg-white top-0 md:flex hidden'>
             <div className='min-w-fit flex gap-8 justify-between px-2 items-end'>
                 <Link to={'/'} className="site_title min-w-fit cursor-pointer flex  items-center gap-1">
@@ -73,7 +74,7 @@ const Navbar = () => {
 
             </ul>
             </nav>
-
+            {/** MOBILE NAVBAR */}
             <nav className='w-full md:flex-row justify-around items-center md:hidden flex bg-white text-xs mobile_navbar top-0 z-50'>
 
                 <Link to={'/'} >

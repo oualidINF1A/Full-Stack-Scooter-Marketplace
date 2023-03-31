@@ -237,7 +237,7 @@ setFinishedShowContactInfo, setFinishedShowCity, finishedShowContactInfo, finish
           <label>Postcode:</label>
           <Switch toggleValue={showCity} onToggle={() => setShowCity(!showCity)} spanText={'Door dit aan te vinken wordt de stad van de advertentie getoond op je advertentie.'}/>
         </div>
-        <input id="zip" name="zip" type="text" inputMode="numeric"
+        <input type="text" inputMode="numeric"
           className={toUpdate ? 'border border-gray-200' : 'border border-black'}
           value={zipCode} onChange={e => setZipCode(e.target.value)}
           disabled={toUpdate}

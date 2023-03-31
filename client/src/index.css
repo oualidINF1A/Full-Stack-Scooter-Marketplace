@@ -11,7 +11,7 @@ body{
 }
 
 input[type='text'], input[type='password'], input[type='email'], input[type='number'], input[type='tel'], select, textarea{
-  @apply p-2 bg-white text-gray-800 rounded w-full md:min-w-[300px] min-w-[200px] ;
+  @apply p-2 bg-white text-gray-800 rounded w-full  ;
 }
 
 select{
@@ -243,7 +243,7 @@ input[type=number] {
 }
 
 .dropdown{
-  @apply   min-w-fit w-[150px] bg-white shadow-lg  fixed overflow-hidden z-10;
+  @apply    bg-white shadow-lg  fixed overflow-hidden z-10;
 }
 
 .dropdown.show{
@@ -251,5 +251,5 @@ input[type=number] {
 }
 
 .dropdown_item{
-  @apply  p-2 cursor-pointer bg-blue-200 hover:bg-blue-500 hover:text-white;
+  @apply  p-2 cursor-pointer bg-blue-200 hover:bg-blue-500 w-full hover:text-white;
 }
