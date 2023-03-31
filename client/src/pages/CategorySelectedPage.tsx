@@ -30,6 +30,8 @@ interface Advert {
     images: string[],
     saves: string[],
     offerPrice: number,
+    showCity: boolean,
+    city: string,
     price: number,
     owner: User,
     phone: string,
