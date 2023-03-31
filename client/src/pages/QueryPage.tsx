@@ -29,6 +29,8 @@ interface User{
     description: string,
     images: string[],
     saves: string[],
+    city: string,
+    showCity: boolean,
     offerPrice: number,
     price: number,
     owner: User,
