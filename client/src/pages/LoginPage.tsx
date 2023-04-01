@@ -5,6 +5,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import ErrorMessage from '../components/ErrorMessage'
 import {useNavigate} from 'react-router-dom'
+import GoogleLogin from '../components/GoogleLogin'
 
 const LoginPage = () => {
     const [email, setEmail] = useState<string>('')
@@ -70,6 +71,9 @@ const LoginPage = () => {
 
                     <h1 className='text-4xl font-bold mb-4'>Inloggen</h1>
                     
+                    {/* TODO ALLOW USER TO LOGIN USING GOOGLE */}
+                    {/* <GoogleLogin/> */}
+
                     {showEmptyFieldError && <ErrorMessage text='Vul alle velden in' />}
                     {showInvalidPasswordError && <ErrorMessage text='Onjuist wachtwoord.' />}
                     {showUserNotFoundError && <ErrorMessage text='Geen gebruiker op dit email adress.' />}

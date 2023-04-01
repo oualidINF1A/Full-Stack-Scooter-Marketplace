@@ -316,9 +316,9 @@ const PostAdvertPage = ({categories}:Props) => {
             <h1 className='text-xl'>{toUpdate ?  'Klaar om bij te werken?' : 'Klaar op te plaatsen?'}</h1>
             <div className='flex flex-col gap-4'>
               <h1 className='text-lg'>Titel: <span className='text-gray-600 italic'>{finishedTitle}</span></h1>
-              <img src={finishedImages[0]} alt="foto" className='h-[400px] w-[300px] rounded-2xl object-contain'
-
-              />
+              <div className=' bg-gray-200 rounded-2xl max-w-fit'>
+                <img src={finishedImages[0]} alt="foto" className='h-[300px] w-[300px] rounded-2xl object-contain'/>
+              </div>
               <h1 className='text-lg'>Beschrijving: <span className='text-gray-600 italic'>{finishedDescription}</span></h1>
               <h1 className='text-lg'>Prijs: <span className='text-gray-600 italic'>{finishedPrice}</span></h1>
 

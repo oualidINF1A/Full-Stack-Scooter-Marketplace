@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 import ErrorMessage from '../components/ErrorMessage';
 import { userContext } from '../context/UserContext';
+import GoogleLogin from '../components/GoogleLogin';
 
 
 const RegisterPage = () => {
@@ -88,12 +89,13 @@ const RegisterPage = () => {
     
 
   return (
-    <div className='w-[100vw] h-[100vh] flex flex-col justify-center items-center -mt-16  fixed'>
+    <div className='w-[100vw] h-[100vh] flex flex-col justify-center items-center -mt-8  fixed'>
         <form className='bg-white rounded-2xl p-8 md:min-w-[500px] min-w-[350px] flex flex-col gap-2'
         onSubmit={(e) => handleRegister(e)}
         >
             <h1 className='text-4xl font-bold'>Registreren</h1>
-            
+            {/* TODO ALLOW USER TO LOGIN USING GOOGLE */}
+            {/* <GoogleLogin/> */}
             {notAllFieldsFilled && <ErrorMessage text='Vul alle velden in.'/> }
             {passwordTooShort && <ErrorMessage text='Wachtwoorden minimum 8 karakters.'/> }
 

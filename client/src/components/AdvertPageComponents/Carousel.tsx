@@ -37,7 +37,7 @@ export default function Carousel({
   return (
     <div className="relative w-full h-full">
 
-    <div className="overflow-hidden relative rounded-xl bg-gray-200 border">
+    <div className="overflow-hidden h-full flex items-center justify-center relative rounded-xl bg-gray-200 border">
       <div
         className="flex transition-transform ease-out duration-500"
         style={{ transform: `translateX(-${curr * 100}%)` }}
@@ -70,7 +70,7 @@ export default function Carousel({
         <img key={i}
           onClick={() => setCurr(i)}
           className={`
-          transition-all w-12 h-12 rounded-sm
+          transition-all w-12 h-12 rounded-sm object-cover cursor-pointer
           ${curr !== i &&"opacity-70"}
         `}
           src={slides[i].props.src}

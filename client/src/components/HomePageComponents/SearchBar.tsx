@@ -10,17 +10,31 @@ const SearchBar = () => {
     const [latitude, setLatitude] = useState<number>(0)
     const navigate = useNavigate()
     const dutchCities = [
-      "amsterdam",
-      "rotterdam",
-      "utrecht",
-      "den haag",
-      "eindhoven",
-      "tilburg",
-      "groningen",
-      "almere",
-      "breda",
-      "nijmegen",
-      "apeldoorn",
+      "Amsterdam",
+      "Rotterdam",
+      "Utrecht",
+      "Den Haag",
+      "Eindhoven",
+      "Tilburg",
+      "Groningen",
+      "Almere",
+      "Breda",
+      "Nijmegen",
+      "Apeldoorn",
+      "Haarlem",
+      "Enschede",
+      "Arnhem",
+      "Zaanstad",
+      "Amersfoort",
+      "Zwolle",
+      "Dordrecht",
+      "Leiden",
+      "Haarlemmermeer", 
+      "Zoetermeer",
+      "Emmen",
+      "Ede",
+      "Delft",
+      "Heerlen",
     ];
     const [citySuggestions, setCitySuggestions] = useState<string[]>([])
 
@@ -46,7 +60,12 @@ const SearchBar = () => {
     }
 
     function isValidDutchCity(city: string): boolean {
-      return dutchCities.includes(city.toLowerCase());
+      for(let i = 0; i < dutchCities.length; i++){
+        if(dutchCities[i].toLowerCase() === city.toLowerCase()){
+          return true
+        }
+      }
+      return false
     }
 
     const onCityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,7 +80,7 @@ const SearchBar = () => {
 
 
   return (
-    <div className='lg:w-2/3 w-full lg:text-sm text-xs  flex flex-col py-2'>
+    <div className='lg:w-2/3 w-[90%] lg:text-sm text-xs  flex flex-col py-2'>
         {cityError && <ErrorMessage text='Ongeldige stad' />}
 
         <div className='w-full flex items-end'>
@@ -72,9 +91,9 @@ const SearchBar = () => {
           onChange={(e) => setQuery(e.target.value)}
           />
 
-          <div className='w-[150px]'>
-            <input type="text" inputMode="numeric"
-              className={'outline-indigo-500 border-y border-indigo-500 h-[40px]  border-r-none rounded-none'}
+          <div className='w-[165px]'>
+            <input inputMode="numeric"
+              className={'outline-indigo-500 border-y border-indigo-500 h-[40px] pl-1 border-r-none rounded-none'}
               value={city} onChange={onCityChange}
               placeholder="Stad"
               
