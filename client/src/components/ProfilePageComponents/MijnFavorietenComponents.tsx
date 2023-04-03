@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { TailSpin } from 'react-loader-spinner'
 import { useNavigate } from 'react-router-dom'
 import FavoriteAdComponent from './FavoriteAdComponent'
+import { Advert } from '../../types'
 
 interface Props{
     user: {
@@ -12,36 +13,6 @@ interface Props{
     }
 }
 
-interface User{
-    name?: string,
-    email?: string,
-    _id?: string
-}
-
-interface Scooter{
-    brand: string,
-    model: string,
-    yearOfConstruction: string,
-    mileage:string,
-    licensePlateType: string,
-    cylinderCapacity: string,
-    condition: string,
-    _id: string,
-}
-
-interface Advert {
-    date: string,
-    title: string,
-    zipCode: string,
-    description: string,
-    images: string[],
-    offerPrice: number,
-    price: number,
-    owner: User,
-    phone: string,
-    scooter: Scooter,
-    _id: string,
-}
 
 
 const MijnFavorietenComponents = ({user}:Props) => {
