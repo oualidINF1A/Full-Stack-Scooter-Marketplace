@@ -13,8 +13,11 @@ const mongoose = require('mongoose');
 
 const Advert = require('../models/AdvertModel.js');
 const Scooter = require('../models/ScooterModel.js');
+const ScooterPart = require('../models/ScooterPart.js');
 const User = require('../models/UserModel.js');
 const Offer = require('../models/OfferModel.js');
+const Channel = require('../models/ChannelModel.js');
+const Message = require('../models/MessageModel.js');
 
 const router = express.Router();
 
@@ -39,6 +42,7 @@ router.post('/new' , async (req, res) => {
     houseNumber,
     showCity,
     province,
+    category,
     brand,
     model,
     extraInfo,
@@ -48,23 +52,37 @@ router.post('/new' , async (req, res) => {
         const url = await cloudinary.uploader.upload(images[i]).catch(err => console.log(err));
         newImages.push(url.secure_url);
     }
-
     try {
-        const scooterDoc = await Scooter.create({
-            brand, model, condition:extraInfo.condition, licensePlateType:extraInfo.licensePlateType, cylinderCapacity:extraInfo.cylinderCapacity, 
-            yearOfConstruction:extraInfo.yearOfConstruction, mileage:extraInfo.mileage 
-        }).catch(err => console.log(err));
+        if(category === 'Scooters'){
+            const scooterDoc = await Scooter.create({
+                category, brand, model, condition:extraInfo.condition, licensePlateType:extraInfo.licensePlateType, cylinderCapacity:extraInfo.cylinderCapacity, 
+                yearOfConstruction:extraInfo.yearOfConstruction, mileage:extraInfo.mileage 
+            }).catch(err => console.log(err));
 
-        const advertDoc = await Advert.create({
-            owner: ownerId, title, description:description+` ${scooterDoc.brand} ${scooterDoc.model}`, price, offerPrice, images:newImages, phone, 
-            showContactInfo,showCity,zipCode,city,
-            location:{
-                type: 'Point',
-                coordinates: [longitude, latitude]
-            }, province,houseNumber ,scooter: scooterDoc._id
-        }).catch(err => console.log(err));
-        res.json({succes:true, advert:advertDoc});
-
+            const advertDoc = await Advert.create({
+                owner: ownerId, title, description:description+` ${scooterDoc.brand} ${scooterDoc.model}`, price, offerPrice, images:newImages, phone, 
+                showContactInfo,showCity,zipCode,city,
+                location:{
+                    type: 'Point',
+                    coordinates: [longitude, latitude]
+                }, province,houseNumber ,scooter: scooterDoc._id
+            }).catch(err => console.log(err));
+            res.json({succes:true, advert:advertDoc});
+        }else{
+            console.log(brand, model, extraInfo.condition)
+            const scooterPartDoc = await ScooterPart.create({
+                partCategory:brand, typeOfPart:model, condition:extraInfo.condition
+            }).catch(err => console.log(err));
+            const advertDoc = await Advert.create({
+                owner: ownerId, title, description:description+` ${scooterPartDoc.partCategory}, ${scooterPartDoc.typeOfPart}`, price, offerPrice, images:newImages, phone, 
+                showContactInfo,showCity,zipCode,city,
+                location:{
+                    type: 'Point',
+                    coordinates: [longitude, latitude]
+                }, province,houseNumber ,scooterPart: scooterPartDoc._id
+            }).catch(err => console.log(err));
+            res.json({succes:true, advert:advertDoc});
+        }
     } catch (error) {
         console.log(error);
         res.status(500).send('Server error');
@@ -92,6 +110,7 @@ router.put('/update/:id', async (req, res) => {
         latitude,
         province,
         showCity,
+        category,
         brand,
         model,
         extraInfo,
@@ -99,13 +118,33 @@ router.put('/update/:id', async (req, res) => {
     try {
         const advert = await Advert.findById(id);
         if(!advert) return res.status(400).json({succes:false, msg:'No advert found'});
-        const scooter = await Scooter.findById(advert.scooter);
-        if(!scooter) return res.status(400).json({succes:false, msg:'No scooter found'});
         const newImages = [];
         for(let i = 0; i < images.length; i++){
             const url = await cloudinary.uploader.upload(images[i]).catch(err => console.log(err));
             newImages.push(url.secure_url);
         }
+        if(category === 'Scooters'){
+            const scooter = await Scooter.findById(advert.scooter);
+            if(!scooter) return res.status(400).json({succes:false, msg:'No scooter found'});
+            scooter.category = category;
+            scooter.brand = brand;
+            scooter.model = model;
+            scooter.condition = extraInfo.condition;
+            scooter.licensePlateType = extraInfo.licensePlateType;
+            scooter.cylinderCapacity = extraInfo.cylinderCapacity;
+            scooter.yearOfConstruction = extraInfo.yearOfConstruction;
+            scooter.mileage = extraInfo.mileage;
+            await scooter.save();
+        }else{
+            const scooterPart = await ScooterPart.findById(advert.scooterPart);
+            if(!scooterPart) return res.status(400).json({succes:false, msg:'No scooter part found'});
+            scooterPart.partCategory = brand;
+            scooterPart.typeOfPart = model;
+            scooterPart.condition = extraInfo.condition;
+            await scooterPart.save();
+        }
+
+
         advert.title = title;
         advert.description = description;
         advert.price = price;
@@ -115,8 +154,6 @@ router.put('/update/:id', async (req, res) => {
         advert.zipCode = zipCode;
         advert.showContactInfo = showContactInfo;
         advert.showCity = showCity;
-        scooter.brand = brand;
-        scooter.model = model;
         advert.city = city;
         advert.location = {
             type: 'Point',
@@ -124,12 +161,7 @@ router.put('/update/:id', async (req, res) => {
         };
         advert.province = province;
         advert.houseNumber = houseNumber;
-        scooter.condition = extraInfo.condition;
-        scooter.licensePlateType = extraInfo.licensePlateType;
-        scooter.cylinderCapacity = extraInfo.cylinderCapacity;
-        scooter.yearOfConstruction = extraInfo.yearOfConstruction;
-        scooter.mileage = extraInfo.mileage;
-        await scooter.save();
+
         await advert.save();
         res.json({succes:true, advert});
     }catch(err){
@@ -144,7 +176,7 @@ router.get('/userAdverts/:id', async (req, res) => {
     const { id } = req.params;
     if(!id) return res.status(400).json({succes:false, msg:'No id provided'});
     try {
-        const adverts = await Advert.find({owner:id}).populate('scooter').populate({
+        const adverts = await Advert.find({owner:id})?.populate('scooter')?.populate('scooterPart').populate({
             path: 'owner', 
             model: 'User',
             select: 'name email'
@@ -165,7 +197,16 @@ router.get('/delete/:id', async (req, res) => {
     try {
         const advert = await Advert.findById(id);
         if(!advert) return res.status(400).json({succes:false, msg:'No advert found'});
-        await Scooter.deleteOne({_id: advert.scooter});
+        if(advert.scooter){
+            await Scooter.deleteOne({_id: advert.scooter});
+        }
+        if(advert.scooterPart){
+            await ScooterPart.deleteOne({_id: advert.scooterPart});
+        }
+        advert.images.forEach(async (image) => {
+            await cloudinary.uploader.destroy(image);
+        });
+
         await Advert.deleteOne({_id: advert._id});
         res.json({succes:true, msg:'Advert deleted'});
     }catch(err){
@@ -180,7 +221,7 @@ router.get('/advert/:id', async (req, res) => {
     const { id } = req.params;
     if(!id) return res.status(400).json({succes:false, msg:'No id provided'}) ;
     try {
-        const advert = await Advert.findById(id).populate('scooter').populate({
+        const advert = await Advert.findById(id)?.populate('scooter')?.populate('scooterPart').populate({
             path: 'owner', 
             model: 'User',
             select: 'name email _id'
@@ -200,7 +241,7 @@ router.post('/all', async (req, res) => {
     try {
         const adverts = await Advert.find().
         skip(skip).limit(10)
-        .populate('scooter').populate({
+        ?.populate('scooter')?.populate('scooterPart').populate({
             path: 'owner', 
             model: 'User',
             select: 'name email'
@@ -275,20 +316,36 @@ router.post('/favorites/delete', async (req, res) => {
     }
 });
 
-router.get(`/adverts/:brand/:model`, async (req, res) => {
+router.get(`/adverts/:category/:brand/:model`, async (req, res) => {
     mongoose.set('strictQuery', true)
     mongoose.connect(`${process.env.MONGOOSE_URL}`);
-    const { brand, model } = req.params;
-    if(!brand || !model) return res.status(400).json({succes:false, msg:'No brand or model provided'});
+    const { brand, model, category } = req.params;
+    if(!brand || !model || !category) return res.status(400).json({succes:false, msg:'No brand or model or category provided'});
     try {
-        const scooters = model === 'alle' ? await Scooter.find({brand}).limit(4).exec() : await Scooter.find({brand, model}).limit(4).exec()
-        if(!scooters) return res.status(400).json({succes:false, msg:'No scooters found'});
-        const adverts = await Advert.find({scooter:{$in:scooters}}).populate('scooter').populate({
-            path: 'owner',
-            model: 'User',
-            select: 'name email'
-        }).exec();
-        res.json({succes:true, adverts});
+        if(category === 'Scooters'){
+            const scooters = model === 'alle' ? await Scooter.find({brand}).limit(4).exec() : await Scooter.find({brand, model}).limit(4).exec()
+            if(!scooters) return res.status(400).json({succes:false, msg:'No scooters found'});
+            const adverts = await Advert.find({scooter:{$in:scooters}})?.populate('scooter')?.populate('scooterPart').populate({
+                path: 'owner',
+                model: 'User',
+                select: 'name email'
+            }).exec();
+            res.json({succes:true, adverts});
+        }else{
+            const scooterParts = model === 'alle' ? await ScooterPart.find(
+                {partCategory:brand}
+            ).limit(4).exec() : await ScooterPart.find({partCategory:brand, typeOfPart:model}).limit(4).exec();
+            if(!scooterParts) return res.status(400).json({succes:false, msg:'No scooter parts found'});
+            const adverts = await Advert.find(
+                {scooterPart:{$in:scooterParts}}
+            )?.populate('scooter')?.populate('scooterPart').populate({
+                path: 'owner',
+                model: 'User',
+                select: 'name email' 
+            }).exec();  
+            res.json({succes:true, adverts});
+        }
+
     }catch(err){
         console.log(err);
         res.status(500).send('Server error');
@@ -302,7 +359,7 @@ router.get('/query/:query/:city', async (req, res) => {
     if(!query) return res.status(400).json({succes:false, msg:'No query provided'});
     try {
         if(city === "none"){
-            const adverts = await Advert.find({$text:{$search:query}}).populate('scooter').populate({
+            const adverts = await Advert.find({$text:{$search:query}})?.populate('scooter')?.populate('scooterPart').populate({
                 path: 'owner',
                 model: 'User',
                 select: 'name email'
@@ -312,7 +369,7 @@ router.get('/query/:query/:city', async (req, res) => {
         }else{
             const adverts = await Advert.find({$text:{$search:query},
                 city:city.charAt(0).toUpperCase() + city.slice(1)
-            }).populate('scooter').populate({
+            })?.populate('scooter')?.populate('scooterPart').populate({
                 path: 'owner'
                 }).exec();
             res.json({succes:true, adverts});    

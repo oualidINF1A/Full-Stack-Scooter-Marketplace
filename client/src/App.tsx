@@ -12,7 +12,7 @@ import PostAdvertPage from './pages/PostAdvertPage'
 import { AdvertPage } from './pages/AdvertPage'
 import CategorySelectedPage from './pages/CategorySelectedPage'
 import QueryPage from './pages/QueryPage'
-
+import { ScooterCategory } from './types'
 
 axios.defaults.baseURL = 'http://localhost:3030/'
 axios.defaults.baseURL = import.meta.env.VITE_AXIOS_BASE_URL
@@ -20,21 +20,7 @@ axios.defaults.withCredentials = true
 
 function App() {
 
-  
-  interface Model {
-    name: string;
-  }
 
-  interface ScooterBrand {
-    name: string;
-    models: { [key: string]: Model };
-  }
-
-  interface ScooterCategory {
-    id: number;
-    name: string;
-    subcategories: ScooterBrand[];
-  }
 
   const categories: ScooterCategory[] = [
     {
@@ -184,6 +170,59 @@ function App() {
       },
       ],
     },
+    {
+      id: 0,
+      name:'Onderdelen',
+      subcategories: [
+        {
+          name:'Motor Onderdelen',
+          models: {
+            '0.1': { name: 'Uitlaat' },
+            '0.2': { name: 'Motorblokken' },
+            '0.3': { name: 'Overbrenging' },
+            '0.4': { name: 'Inlaat' },
+            '0.5': { name: 'Ontsteking' },
+            '0.6': { name: 'Overige' },
+          }
+        },
+        {
+          name:'Elektrische Onderdelen',
+          models: {
+            '1.1': { name: 'Verlichting' },
+            '1.2': { name: 'Startsysteem' },
+            '1.3': { name: 'Overige' },
+          }
+        },
+        {
+          name:'Frame Onderdelen',
+          models: {
+            '2.1': { name: 'Frame' },
+            '2.2':{ name: 'Vering' },
+            '2.3': { name: 'Remsysteem' },
+            '2.4': { name: 'Wielen' },
+            '2.5': { name: 'Stuurinrichting' },
+            '2.6': { name: 'Overige' },
+        }
+        },
+        {
+          name:'Accessoires',
+          models:{
+            '3.1': { name: 'Kleding' },
+            '3.2': { name: 'Helm' },
+            '3.3': { name: 'Sloten' },
+            '3.4': { name: 'Overige' },
+          }
+        },
+        {
+          name:'Onderhoud',
+          models:{
+            '4.1': { name: 'Gereedschap' },
+            '4.2': { name: 'Vloeistof' },
+            '4.3': { name: 'Overige' },
+        }
+        },
+      ]
+    },
   ];
 
 
@@ -200,7 +239,7 @@ function App() {
         <Route path='/advertentie_plaatsen' element={<PostAdvertPage categories={categories}/>} />
         <Route path='/advert/:id' element={<AdvertPage />}/>
         <Route path='/account/:id' element={<ProfilePage/>}/>
-        <Route path='/category/:brand/:model' element={<CategorySelectedPage/>}/>
+        <Route path='/category/:category/:brand/:model' element={<CategorySelectedPage/>}/>
         <Route path='/search/q/:query' element={<QueryPage/>}/>
       </Route>
       <Route path="*" element={<div>PAGE NOT FOUND ERROR 404</div>} />

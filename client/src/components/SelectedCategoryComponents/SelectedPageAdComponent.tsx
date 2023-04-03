@@ -1,40 +1,7 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import moment from 'moment'
-
-interface User{
-    name?: string,
-    email?: string,
-    _id?: string
-}
-
-interface Scooter{
-    brand: string,
-    model: string,
-    yearOfConstruction: string,
-    mileage:string,
-    licensePlateType: string,
-    cylinderCapacity: string,
-    condition: string,
-    _id: string,
-}
-
-interface Advert {
-    date: string,
-    title: string,
-    zipCode: string,
-    description: string,
-    images: string[],
-    saves: string[],
-    offerPrice: number,
-    showCity: boolean,
-    price: number,
-    city: string,
-    owner: User,
-    phone: string,
-    scooter: Scooter,
-    _id: string,
-}
+import { Advert } from '../../types'
 
 interface Props {
     advert: Advert
@@ -48,7 +15,7 @@ const SelectedPageAdComponent = ({advert}:Props) => {
         {/* Desktop view */}
         <div className="md:flex hidden border max-h-[220px] min-h-fit justify-between px-2 py-1 bg-white rounded-md">
             <div className='flex gap-4'>
-                <div className='bg-gray-125 border rounded-sm max-w-fit cursor-pointer' onClick={() => navigate(`/advert/${advert._id}`)}>
+                <div className='bg-gray-100 border rounded-sm max-w-fit cursor-pointer' onClick={() => navigate(`/advert/${advert._id}`)}>
                     <img src={advert.images[0]} alt="" className='max-h-[200px] h-[200px] max-w-[200px] w-[200px] object-contain' />
                 </div>
 
@@ -57,11 +24,21 @@ const SelectedPageAdComponent = ({advert}:Props) => {
                         <Link to={`/advert/${advert._id}`} className='text-lg font-semibold text-indigo-500 hover:underline'>{advert.title}</Link>
                         <p className='md:max-w-[500px] max-w-[100px]'>{advert.description}</p>
                     </div>
+                    {advert.scooter && (
                     <div className='flex gap-1 font-semibold'>
                         <p className='text-gray-600'>{advert.scooter.model}</p> | 
                         <p className='text-gray-600'>{advert.scooter.condition}</p> |
                         <p className='text-gray-600'>{advert.scooter.yearOfConstruction}</p> 
                     </div>
+                    )}
+
+                    {advert.scooterPart && (
+                    <div className='flex gap-1 font-semibold'>
+                        <p className='text-gray-600'>{advert.scooterPart.typeOfPart}</p> | 
+                        <p className='text-gray-600'>{advert.scooterPart.condition}</p> |
+                    </div>
+                    )}
+
 
                 </div>
             </div>
@@ -101,7 +78,7 @@ const SelectedPageAdComponent = ({advert}:Props) => {
                         </div>
                         <div className='flex gap-2 text-xs'>
                             {advert.showCity && <p className='text-gray-600'>{advert.city} |</p> }
-                            <p className='text-gray-600'>{advert.scooter.model}</p>
+                            {advert.scooter && <p className='text-gray-600'>{advert.scooter.model}</p>}
                         </div>
                     </div>
                     <div className='flex flex-col justify-between text-xs'>

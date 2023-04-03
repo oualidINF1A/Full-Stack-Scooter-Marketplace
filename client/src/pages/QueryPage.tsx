@@ -5,39 +5,7 @@ import SelectedPageAdComponent from '../components/SelectedCategoryComponents/Se
 import SearchBar from '../components/HomePageComponents/SearchBar'
 import { TailSpin } from 'react-loader-spinner'
 import { useLocation } from 'react-router-dom'
-interface User{
-    name?: string,
-    email?: string,
-    _id?: string
-  }
-  
-  interface Scooter{
-    brand: string,
-    model: string,
-    yearOfConstruction: string,
-    mileage:string,
-    licensePlateType: string,
-    cylinderCapacity: string,
-    condition: string,
-    _id: string,
-  }
-  
-  interface Advert {
-    date: string,
-    title: string,
-    zipCode: string,
-    description: string,
-    images: string[],
-    saves: string[],
-    city: string,
-    showCity: boolean,
-    offerPrice: number,
-    price: number,
-    owner: User,
-    phone: string,
-    scooter: Scooter,
-    _id: string,
-  }
+import { Advert } from '../types'
   
 
 const QueryPage = () => {
@@ -101,8 +69,8 @@ const QueryPage = () => {
 
   return (
     <div className='w-full flex justify-center category_selected'>
-    <div className='w-full flex justify-center flex-col'>
-      <div className='ml-16'>
+    <div className='w-full flex justify-center items-center flex-col'>
+      <div className='flex justify-center flex-col items-center w-full'>
       <SearchBar/>
         {adverts.length > 0 && (
             <div className='flex gap-2 mb-4'>
@@ -127,7 +95,12 @@ const QueryPage = () => {
       </div>
 
 
-    <div className='w-full'>
+    <div className='w-full lg:hidden block'>
+    {adverts.map((advert: Advert) => (
+        <SelectedPageAdComponent advert={advert} key={advert._id}/>
+    ))}
+    </div>
+    <div className='w-4/5 lg:block hidden'>
     {adverts.map((advert: Advert) => (
         <SelectedPageAdComponent advert={advert} key={advert._id}/>
     ))}

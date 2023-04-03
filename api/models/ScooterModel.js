@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const {Schema} = mongoose;
 
 const ScooterSchema = new Schema({
+    category: String,
     brand: String,
     model: String,
     condition: String,

@@ -20,10 +20,6 @@ export default function Carousel({
   const [curr, setCurr] = useState(0)
   const navigate = useNavigate()
 
-  useEffect(() => {
-    if(!slides) return
-  },[])
-
   const prev = () =>
     setCurr((curr) => (curr === 0 ? slides.length - 1 : curr - 1))
   const next = () =>
@@ -37,10 +33,10 @@ export default function Carousel({
   return (
     <div className="relative w-full h-full">
 
-    <div className="overflow-hidden h-full flex items-center justify-center relative rounded-xl bg-gray-200 border">
+    <div className="overflow-hidden h-full relative rounded-xl bg-gray-200 border">
       <div
         className="flex transition-transform ease-out duration-500"
-        style={{ transform: `translateX(-${curr * 100}%)` }}
+        style={{ transform: `translateX(-${curr * 100.5}%)` }}
       >
         {slides}
       </div>

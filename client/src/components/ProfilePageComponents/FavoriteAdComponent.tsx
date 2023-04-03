@@ -2,39 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import ErrorMessage from '../ErrorMessage'
-
-
-
-interface User{
-    name?: string,
-    email?: string,
-    _id?: string
-}
-
-interface Scooter{
-    brand: string,
-    model: string,
-    yearOfConstruction: string,
-    mileage:string,
-    licensePlateType: string,
-    cylinderCapacity: string,
-    condition: string,
-    _id: string,
-}
-
-interface Advert {
-    date: string,
-    title: string,
-    zipCode: string,
-    description: string,
-    images: string[],
-    offerPrice: number,
-    price: number,
-    owner: User,
-    phone: string,
-    scooter: Scooter,
-    _id: string,
-}
+import { Advert, User } from '../../types'
 
 interface Props{
     advert: Advert,

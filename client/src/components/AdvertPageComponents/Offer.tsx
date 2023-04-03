@@ -3,60 +3,16 @@ import moment from 'moment'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
-interface User{
-    name?: string,
-    email?: string,
-    _id?: string
-}
-
-interface Offer{
-    owner:User,
-    amount: number,
-    date:string,
-    _id: string,
-}
+import { OfferType, User, Advert } from '../../types'
 
 interface Props{
-    offer: Offer,
+    offer: OfferType,
     isOwner: boolean
     user: User,  
     advert?: Advert, 
-    setOffers: React.Dispatch<React.SetStateAction<Offer[]>>,
+    setOffers: React.Dispatch<React.SetStateAction<OfferType[]>>,
 }
 
-interface Scooter{
-    brand: string,
-    model: string,
-    yearOfConstruction: string,
-    mileage:string,
-    licensePlateType: string,
-    cylinderCapacity: string,
-    condition: string,
-    _id: string,
-}
-
-interface Offer{
-    owner:User,
-    amount: number,
-    date:string,
-    _id: string,
-}
-
-interface Advert {
-    date?: string,
-    title: string,
-    zipCode: string,
-    description: string,
-    images: string[],
-    offers: Offer[],
-    offerPrice: number,
-    price: number,
-    owner: User,
-    phone: string,
-    scooter: Scooter,
-    saves:string[]
-    _id: string,
-}
 
 const Offer = ({offer, isOwner, user, advert, setOffers}:Props) => {
     const [showingOptions, setShowingOptions] = useState(false)

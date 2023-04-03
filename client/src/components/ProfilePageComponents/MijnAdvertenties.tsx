@@ -3,6 +3,7 @@ import {TailSpin} from 'react-loader-spinner'
 import { useNavigate } from 'react-router-dom'
 import moment from 'moment'
 import axios from 'axios'
+import { Advert } from '../../types'
 
 interface Props{
     user: {
@@ -10,37 +11,6 @@ interface Props{
         email?: string,
         _id?: string
     }
-}
-
-interface User{
-    name?: string,
-    email?: string,
-    _id?: string
-}
-
-interface Scooter{
-    brand: string,
-    model: string,
-    yearOfConstruction: string,
-    mileage:string,
-    licensePlateType: string,
-    cylinderCapacity: string,
-    condition: string,
-    _id: string,
-}
-
-interface Advert {
-    date: string,
-    title: string,
-    zipCode: string,
-    description: string,
-    images: string[],
-    offerPrice: number,
-    price: number,
-    owner: User,
-    phone: string,
-    scooter: Scooter,
-    _id: string,
 }
 
 const MijnAdvertenties = ({user}:Props) => {
@@ -113,6 +83,8 @@ const MijnAdvertenties = ({user}:Props) => {
                     onClick={() => navigate(`/advert/${advert._id}`)}
                     />
                     <div className='md:flex hidden w-full justify-around'>
+                        {advert.scooter && (
+                        <>
                         <div className='flex flex-col'>
                             <span className='text-md font-bold'>{advert.title}</span>
                             <span className='text-sm'>{advert.scooter.brand} ,{advert.scooter.model}</span>
@@ -127,6 +99,25 @@ const MijnAdvertenties = ({user}:Props) => {
                             <span className='text-sm'>{advert.scooter.condition}</span>
                             <span className='text-sm font-bold italic'>{moment(advert.date).format('DD-MM-YYYY')}</span>
                         </div>
+                        </>
+                        )}
+
+                        {advert.scooterPart && (
+                            <>
+                            <div className='flex flex-col'>
+                                <span className='text-md font-bold'>{advert.title}</span>
+                                <span className='text-sm'>{advert.scooterPart.partCategory} ,{advert.scooterPart.typeOfPart}</span>
+                                <span className='text-md text-indigo-500 font-bold'>{
+                                    new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' }).format(advert.price)
+                                }</span>
+                             </div>
+                             <div className='flex flex-col'>
+                                <span className='text-sm'>{advert.scooterPart.condition}</span>
+                                <span className='text-sm font-bold italic'>{moment(advert.date).format('DD-MM-YYYY')}</span>
+                             </div>
+                            </>
+                        )}
+
 
                     </div> 
                 </div>

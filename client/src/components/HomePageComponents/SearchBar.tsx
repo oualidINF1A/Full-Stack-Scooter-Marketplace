@@ -6,8 +6,6 @@ const SearchBar = () => {
     const [query, setQuery] = useState('')
     const [city, setcity] = useState('')
     const [cityError, setcityError] = useState(false)
-    const [longitude, setLongitude] = useState<number>(0)
-    const [latitude, setLatitude] = useState<number>(0)
     const navigate = useNavigate()
     const dutchCities = [
       "Amsterdam",
@@ -80,7 +78,7 @@ const SearchBar = () => {
 
 
   return (
-    <div className='lg:w-2/3 w-[90%] lg:text-sm text-xs  flex flex-col py-2'>
+    <div className='lg:w-2/3 min-w-[90%] w-[90%] lg:text-sm text-xs  flex flex-col py-2'>
         {cityError && <ErrorMessage text='Ongeldige stad' />}
 
         <div className='w-full flex items-end'>

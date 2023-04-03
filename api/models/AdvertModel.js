@@ -20,7 +20,8 @@ const AdvertSchema = new Schema({
     },
     showCity: {type: Boolean, default: false},
     province: String,
-    scooter: {type: Schema.Types.ObjectId, ref: 'Scooter'},
+    scooter: {type: Schema.Types.ObjectId, ref: 'Scooter', required: false},
+    scooterPart : {type: Schema.Types.ObjectId, ref: 'ScooterPart', required: false},
     saves: [{type: Schema.Types.ObjectId, ref: 'User', default: []}],
     date: { type: Date, default: Date.now },
 });
