@@ -55,7 +55,7 @@ const BerichtenPage = () => {
     const {data} = await axios.get(`/berichten/channels/${user._id}`)
     setLoading(false)
     setChannels(data.channels)
-    if(activeChannel === ''){
+    if(activeChannel === '' && data.channels.length > 0){
       setActiveChannel(data.channels[0]._id)
     }else{
       setActiveChannel(activeChannel)
