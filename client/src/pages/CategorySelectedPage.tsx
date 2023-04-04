@@ -65,7 +65,7 @@ const CategorySelectedPage = () => {
 
   return (
     <div className='w-full flex justify-center category_selected'>
-        <div className=' flex flex-col'>
+        <div className='w-full flex flex-col items-center'>
             {adverts.length > 0 && (
                 <div className='flex gap-2 mb-4'>
 
@@ -86,10 +86,20 @@ const CategorySelectedPage = () => {
                 
                 </div>
             )}
-
+            
+        <div className='w-full lg:hidden block'> 
         {adverts.map((advert: Advert, index:number) => (
             <SelectedPageAdComponent advert={advert} key={index}/>
         ))}
+        </div>
+
+        <div className='w-4/5 lg:block hidden'> 
+        {adverts.map((advert: Advert, index:number) => (
+            <SelectedPageAdComponent advert={advert} key={index}/>
+        ))}
+        </div>
+
+
         </div>
 
     </div>

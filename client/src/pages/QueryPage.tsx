@@ -73,25 +73,25 @@ const QueryPage = () => {
       <div className='flex justify-center flex-col items-center w-full'>
       <SearchBar/>
         {adverts.length > 0 && (
-            <div className='flex gap-2 mb-4'>
+              <div className='flex gap-2 mb-4'>
 
-                <button className={currSort === 'populair' ? 'primary_btn' : 'secondary_btn'}
-                disabled={currSort === 'populair' ? true : false}
-                onClick={() => setCurrSort('populair')}>
-                Populair</button>
+                  <button className={currSort === 'populair' ? 'primary_btn' : 'secondary_btn'}
+                  disabled={currSort === 'populair' ? true : false}
+                  onClick={() => setCurrSort('populair')}>
+                  Populair</button>
 
-                <button className={currSort === 'nieuw' ? 'primary_btn' : 'secondary_btn'}
-                onClick={() => setCurrSort('nieuw')}
-                disabled={currSort === 'nieuw' ? true : false}>
-                Nieuw</button>
+                  <button className={currSort === 'nieuw' ? 'primary_btn' : 'secondary_btn'}
+                  onClick={() => setCurrSort('nieuw')}
+                  disabled={currSort === 'nieuw' ? true : false}>
+                  Nieuw</button>
 
-                <button className={currSort === 'prijs' ? 'primary_btn' : 'secondary_btn'}
-                onClick={() => setCurrSort('prijs')}
-                disabled={currSort === 'prijs' ? true : false}>
-                Prijs</button>
-            
-            </div>
-        )}
+                  <button className={currSort === 'prijs' ? 'primary_btn' : 'secondary_btn'}
+                  onClick={() => setCurrSort('prijs')}
+                  disabled={currSort === 'prijs' ? true : false}>
+                  Prijs</button>
+              
+              </div>
+          )}
       </div>
 
 
