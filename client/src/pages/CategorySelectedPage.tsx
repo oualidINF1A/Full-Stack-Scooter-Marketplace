@@ -21,10 +21,8 @@ const CategorySelectedPage = () => {
         try {
             const response = await axios.get(`/advert/adverts/${category}/${brand}/${model}`)
             if(response.data.succes){
-                console.log(response.data.adverts, category, brand, model)
-                const testMultipleAdverts = [...response.data.adverts, ...response.data.adverts, ...response.data.adverts]
                 setCurrSort('nieuw')
-                setAdverts(testMultipleAdverts)
+                setAdverts(response.data.adverts)
             }
             setFetchingData(false)
         } catch (error) {
@@ -33,18 +31,18 @@ const CategorySelectedPage = () => {
     }
 
     useEffect(() => {
-        if(!brand || !model) return
-        const sortedAdverts = [...adverts].sort((a, b) => {
-            if(currSort === 'nieuw'){
-                return moment(b.date).diff(moment(a.date))
-            } else if (currSort === 'populair') {
-                return moment(b.saves.length).diff(moment(a.saves.length))
-            }else{
-                return moment(a.price).diff(moment(b.price))
-            }
-        })
-        setAdverts(sortedAdverts)
-    }, [currSort])
+        switch(currSort){
+          case 'populair':
+            setAdverts(adverts.sort((a,b) => b.saves.length - a.saves.length))
+            break;
+          case 'nieuw':
+            setAdverts(adverts.sort((a,b) => new Date(b.date).getTime() - new Date(a.date).getTime()))
+            break;
+          case 'prijs':
+            setAdverts(adverts.sort((a,b) => b.price - a.price))
+            break;
+        }
+      },[currSort])
 
     useEffect(() => {
         if(!brand || !model || !category) return

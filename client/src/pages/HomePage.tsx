@@ -43,9 +43,7 @@ const HomePage = ({categories}:Props) => {
     const res = await axios.post('/advert/all', {skip: 0})
     if(!res.data.succes) return
 
-    setAdverts([...res.data.adverts, ...res.data.adverts, ...res.data.adverts, 
-      ...res.data.adverts, ...res.data.adverts, 
-    ]) 
+    setAdverts(res.data.adverts) 
     setSkip(res.data.adverts.length)
     setLoading(false)
     setDataLoaded(true)
