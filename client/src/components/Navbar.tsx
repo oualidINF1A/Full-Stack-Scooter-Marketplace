@@ -74,6 +74,7 @@ const Navbar = () => {
 
             </ul>
             </nav>
+            
             {/** MOBILE NAVBAR */}
             <nav className='w-full md:flex-row justify-around items-center md:hidden flex bg-white text-xs mobile_navbar top-0 z-50'>
 

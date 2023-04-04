@@ -78,7 +78,7 @@ const SearchBar = () => {
 
 
   return (
-    <div className='lg:w-2/3 min-w-[90%] w-[90%] lg:text-sm text-xs  flex flex-col py-2'>
+    <div className=' md:min-w-[55%] md:w-[55%] w-[90%] min-w-[90%] lg:text-sm text-xs  flex flex-col py-2'>
         {cityError && <ErrorMessage text='Ongeldige stad' />}
 
         <div className='w-full flex items-end'>

@@ -104,10 +104,10 @@ export const AdvertPage = () => {
     }
 
     useEffect(() => {
-        if(!user._id || dataLoaded || !id) return
+        if(dataLoaded) return
         setDataLoaded(true)
         getAdvert()
-    }, [user])
+    }, [])
 
     useEffect(() => {
         if(!advert?._id) return
@@ -175,14 +175,14 @@ ${user.name}.
         </div>
     )
 
-    if(!advert) return (
+    if(!advert?._id) return (
         <div className='flex justify-center items-center'>
             <TailSpin color='gray' height={100} width={100} />
         </div>
     )
 
     if(!user._id) return (
-        <div className='flex justify-center items-center'>
+        <div className='flex justify-center items-center mt-32 text-lg font-bold'>
             Je moet ingelogd zijn om deze pagina te kunnen bekijken.
         </div>
     )

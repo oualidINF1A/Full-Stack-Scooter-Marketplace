@@ -17,14 +17,7 @@ const LoginPage = () => {
 
     const navigate = useNavigate()
 
-    const {user, setUser} = useContext(userContext);
-
-    
-
-
-
-
-
+    const { setUser} = useContext(userContext);
 
     const handleLogin = () => {
         if(email == '' || password == ''){

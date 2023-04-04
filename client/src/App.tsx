@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import axios from 'axios'	
-import {Routes, Route} from 'react-router-dom'
+import {BrowserRouter as Router ,Routes, Route} from 'react-router-dom'
 import BerichtenPage from './pages/BerichtenPage'
 import HomePage from './pages/HomePage'
 import HulpEnInfoPage from './pages/HulpEnInfoPage'
@@ -13,6 +13,7 @@ import { AdvertPage } from './pages/AdvertPage'
 import CategorySelectedPage from './pages/CategorySelectedPage'
 import QueryPage from './pages/QueryPage'
 import { ScooterCategory } from './types'
+import Navbar from './components/Navbar'
 
 axios.defaults.baseURL = 'http://localhost:3030/'
 axios.defaults.baseURL = import.meta.env.VITE_AXIOS_BASE_URL
@@ -228,22 +229,26 @@ function App() {
 
 
   return (
-    <Routes>
-      <Route path="/" element={<Parent/>}>
-        <Route path="/" element={<HomePage categories={categories}/>} />
-        <Route path="/login" element={<LoginPage/>}/>
-        <Route path="/register" element={<RegisterPage/>}/>
-        <Route path="/hulp_en_info" element={<HulpEnInfoPage/>} />
-        <Route path="/berichten" element={<BerichtenPage/>} />
-        <Route path="/profile/:choice" element={<ProfilePage/>} />
-        <Route path='/advertentie_plaatsen' element={<PostAdvertPage categories={categories}/>} />
-        <Route path='/advert/:id' element={<AdvertPage />}/>
-        <Route path='/account/:id' element={<ProfilePage/>}/>
-        <Route path='/category/:category/:brand/:model' element={<CategorySelectedPage/>}/>
-        <Route path='/search/q/:query' element={<QueryPage/>}/>
-      </Route>
-      <Route path="*" element={<div>PAGE NOT FOUND ERROR 404</div>} />
-    </Routes>
+    <Router>
+      <Navbar/>
+      <Routes>  
+        <Route path="/" element={<Parent/>}>
+          <Route path="/" element={<HomePage categories={categories}/>} />
+          <Route path="/login" element={<LoginPage/>}/>
+          <Route path="/register" element={<RegisterPage/>}/>
+          <Route path="/hulp_en_info" element={<HulpEnInfoPage/>} />
+          <Route path="/berichten" element={<BerichtenPage/>} />
+          <Route path="/profile/:choice" element={<ProfilePage/>} />
+          <Route path='/advertentie_plaatsen' element={<PostAdvertPage categories={categories}/>} />
+          <Route path='/advert/:id' element={<AdvertPage />}/>
+          <Route path='/account/:id' element={<ProfilePage/>}/>
+          <Route path='/category/:category/:brand/:model' element={<CategorySelectedPage/>}/>
+          <Route path='/search/q/:query' element={<QueryPage/>}/>
+        </Route>
+        <Route path="*" element={<div>PAGE NOT FOUND ERROR 404</div>} />
+      </Routes>
+    </Router>
+
   )
 }
 
