@@ -6,15 +6,15 @@ import moment from 'moment'
 import SelectedPageAdComponent from '../components/SelectedCategoryComponents/SelectedPageAdComponent'
 import { Advert } from '../types'
 
-
-
-
-
 const CategorySelectedPage = () => {
     const {category , brand, model, query} = useParams()
     const [adverts, setAdverts] = useState<Advert[]>([])
     const [fetchingData, setFetchingData] = useState<boolean>(false)
     const [currSort, setCurrSort] = useState<string>('')
+    const [seed, setSeed] = useState(1);
+    const reset = () => {
+        setSeed(Math.random());
+    }
 
     const getAdverts = async () => {
         setFetchingData(true)
@@ -31,16 +31,30 @@ const CategorySelectedPage = () => {
     }
 
     useEffect(() => {
-        switch(currSort){
-          case 'populair':
-            setAdverts(adverts.sort((a,b) => b.saves.length - a.saves.length))
-            break;
-          case 'nieuw':
-            setAdverts(adverts.sort((a,b) => new Date(b.date).getTime() - new Date(a.date).getTime()))
-            break;
-          case 'prijs':
-            setAdverts(adverts.sort((a,b) => b.price - a.price))
-            break;
+        if(!currSort) return
+        if(currSort === 'populair'){
+            const sortedAdverts = adverts.sort((a, b) => {
+                return b.saves.length - a.saves.length
+            })
+            setAdverts(sortedAdverts)
+            reset()
+            return
+        }
+        else if(currSort === 'nieuw'){
+            const sortedAdverts = adverts.sort((a, b) => {
+                return moment(b.date).unix() - moment(a.date).unix()
+            })
+            setAdverts(sortedAdverts)
+            reset()
+            return
+        }
+        else{
+            const sortedAdverts = adverts.sort((a, b) => {
+                return a.price - b.price
+            })
+            setAdverts(sortedAdverts)
+            reset()
+            return
         }
       },[currSort])
 
@@ -64,7 +78,7 @@ const CategorySelectedPage = () => {
 
 
   return (
-    <div className='w-full flex justify-center category_selected'>
+    <div className='w-full flex justify-center category_selected' key={seed}>
         <div className='w-full flex flex-col items-center'>
             {adverts.length > 0 && (
                 <div className='flex gap-2 mb-4'>
