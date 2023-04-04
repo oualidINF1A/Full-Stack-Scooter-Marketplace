@@ -87,13 +87,8 @@ const PostAdvertPage = ({categories}:Props) => {
     setCurrentShow(2)
   }
 
-  useEffect(() => {
-    console.log(selectedBrand, selectedModel)
-  }, [selectedBrand, selectedModel])
-
   const handleFinalSubmit = () => {
     if (uploading) return
-    setUploading(true)
     // CHECK IF ANY INPUT IS EMPTY
     if(selectedCategory === 'Scooters'){
       if (finishedOfferPrice === '' || finishedPhone === '' || finishedZipCode === '' || finishedTitle === ''
