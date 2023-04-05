@@ -33,7 +33,7 @@ export default function Carousel({
   return (
     <div className="relative w-full h-full">
 
-    <div className="overflow-hidden h-full relative rounded-xl bg-gray-200 border">
+    <div className="overflow-hidden h-full relative rounded-xl bg-gray-200 border flex items-center justify-center ">
       <div
         className="flex transition-transform ease-out duration-500"
         style={{ transform: `translateX(-${curr * 100.5}%)` }}
