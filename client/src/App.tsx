@@ -14,6 +14,7 @@ import CategorySelectedPage from './pages/CategorySelectedPage'
 import QueryPage from './pages/QueryPage'
 import { ScooterCategory } from './types'
 import Navbar from './components/Navbar'
+import PageNotFoundPage from './pages/PageNotFoundPage'
 
 axios.defaults.baseURL = 'http://localhost:3030/'
 axios.defaults.baseURL = import.meta.env.VITE_AXIOS_BASE_URL
@@ -244,8 +245,8 @@ function App() {
           <Route path='/account/:id' element={<ProfilePage/>}/>
           <Route path='/category/:category/:brand/:model' element={<CategorySelectedPage/>}/>
           <Route path='/search/q/:query' element={<QueryPage/>}/>
+          <Route path="*" element={<PageNotFoundPage/>} />
         </Route>
-        <Route path="*" element={<div>PAGE NOT FOUND ERROR 404</div>} />
       </Routes>
     </Router>
 

@@ -4,7 +4,7 @@ import Navbar from './components/Navbar'
 
 const Parent = () => {
   return (
-      <div className='lg:mt-16 mt-28'>
+      <div className='lg:mt-16 mt-28 mb-64'>
         <Outlet />
       </div>
   )

@@ -27,28 +27,9 @@ const HomePageSidebar = ({categories}:Props) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('')
   const [categoryToShowOptionsOf, setCategoryToShowOptionsOf] = useState<string>('')
 
-  const getBrandIndex = ():number => {
-    if(selectedBrand === '') return 0
-    for(let i = 0; i < categories[0].subcategories.length; i++){
-      if(categories[0].subcategories[i].name === selectedBrand) return i
-    }
-    return 0
-  } 
-
-  const getcategoryIndex = ():number => {
-    if(selectedCategory === '') return 0
-    for(let i = 0; i < categories[0].subcategories.length; i++){
-      if(categories[i].name === selectedCategory){
-        console.log(categories[i].name)
-        return i
-      }
-    }
-    return 0
-  }
-
-
   return (
-    <div className='w-1/6 min-w-[200px] border bg-white shadow-sm min-h-fit rounded-b-xl p-1'>
+    <div className='w-1/6 min-w-[200px] bg-white shadow-sm min-h-fit rounded-b-xl p-1
+    shadow-blue-500'>
       <h1 className='text-lg font-semibold text-center w-full'>Selecteer</h1>
       <div className='flex flex-col gap-2'>
         <div className=''>

@@ -89,15 +89,15 @@ const SearchBar = () => {
           onChange={(e) => setQuery(e.target.value)}
           />
 
-          <div className='w-[165px]'>
+          <div className='md:w-[165px] w-[140px]'>
             <input inputMode="numeric"
               className={'outline-indigo-500 border-y border-indigo-500 h-[40px] pl-1 border-r-none rounded-none'}
               value={city} onChange={onCityChange}
               placeholder="Stad"
-              
+              type='text'
             />
             {city && (
-              <div className={`dropdown relative z-40 w-[150px]  
+              <div className={`dropdown relative z-40 md:w-[165px] w-[120px]
               ${citySuggestions.length == 0 && 'hidden'}`}>
               <div className='dropdown-content'>
                 {citySuggestions.map((city, index) => (
