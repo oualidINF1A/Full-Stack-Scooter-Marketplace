@@ -76,9 +76,9 @@ const SearchBar = () => {
     }
     
 
-
   return (
-    <div className=' md:min-w-[55%] md:w-[55%] w-[90%] min-w-[90%] lg:text-sm text-xs  flex flex-col py-2'>
+    <>
+      <div className='w-[55%] lg:flex hidden  lg:text-sm text-xs flex-col py-2'>
         {cityError && <ErrorMessage text='Ongeldige stad' />}
 
         <div className='w-full flex items-end'>
@@ -89,12 +89,11 @@ const SearchBar = () => {
           onChange={(e) => setQuery(e.target.value)}
           />
 
-          <div className='md:w-[165px] w-[140px]'>
-            <input inputMode="numeric"
+          <div className='md:w-[165px] w-[80px]'>
+            <input 
               className={'outline-indigo-500 border-y border-indigo-500 h-[40px] pl-1 border-r-none rounded-none'}
               value={city} onChange={onCityChange}
               placeholder="Stad"
-              type='text'
             />
             {city && (
               <div className={`dropdown relative z-40 md:w-[165px] w-[120px]
@@ -117,7 +116,52 @@ const SearchBar = () => {
           >Zoek</button>
         </div>
 
-    </div>
+      </div>
+
+      <div className=' w-[90%] lg:hidden lg:text-sm text-xs flex flex-col'>
+        {cityError && <ErrorMessage text='Ongeldige stad' />}
+
+        <div className='w-full flex items-end rounded-md'>
+          <input placeholder='Welk soort scooter ben je op zoek?' 
+          className='w-full  rounded-none outline-indigo-500 border border-indigo-500
+          h-[40px] px-2 rounded-l-full'
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          />
+
+          <div className='md:w-[165px]'>
+            <input 
+              className={'outline-indigo-500 border-y border-indigo-500 h-[40px] pl-1 border-t border-r border-b  rounded-none'}
+              value={city} onChange={onCityChange}
+              placeholder="Stad"
+            />
+            {city && (
+              <div className={`dropdown relative z-40 md:w-[165px] w-[120px]
+              ${citySuggestions.length == 0 && 'hidden'}`}>
+              <div className='dropdown-content'>
+                {citySuggestions.map((city, index) => (
+                  <div key={index} className='dropdown_item' onClick={() => {
+                    setcity(city)
+                    setCitySuggestions([])
+                  }}>{city}</div>
+                ))}
+            </div>
+            </div>
+            )}
+
+          </div>
+
+          <button className='primary_btn h-full'>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-full">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+          </svg>
+
+          </button>
+        </div>
+
+      </div>
+    </>
+
   )
 }
 

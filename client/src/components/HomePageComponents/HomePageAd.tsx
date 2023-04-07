@@ -8,7 +8,7 @@ interface Props {
 
 const HomePageAd = ({advert}:Props) => {
   return (
-    <Link to={`/advert/${advert._id}`} className='shadow-md shadow-blue-500'>
+    <Link to={`/advert/${advert._id}`} className='shadow-sm shadow-blue-500'>
       <div className=' bg-white shadow-md w-fit lg:min-w-[220px] min-w-[150px]'>
         <div className='flex justify-center bg-gray-200'>
         <img src={advert.images[0]} alt="" className='lg:w-[220px] lg:h-[220px] w-[150px] h-[150px] 

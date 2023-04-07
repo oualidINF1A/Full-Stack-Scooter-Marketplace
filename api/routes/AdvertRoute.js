@@ -242,7 +242,7 @@ router.post('/all', async (req, res) => {
         const adverts = await Advert.find().
         skip(skip).limit(10)
         ?.populate('scooter')?.populate('scooterPart').populate({
-            path: 'owner', 
+            path: 'owner',  // populate owner field
             model: 'User',
             select: 'name email'
           }).exec();
