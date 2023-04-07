@@ -134,7 +134,7 @@ const SearchBar = () => {
           <div className='md:w-[165px]'>
             <input
             inputMode='search'
-              className={'outline-indigo-500 border-y border-indigo-500 h-[40px] pl-1 border-t border-r border-b  rounded-none'}
+              className={'outline-indigo-500 border-y border-indigo-500 h-[40px] pl-1 border-t border-r border-b  rounded-r-full'}
               value={city} onChange={onCityChange}
               placeholder="Stad"
             />
@@ -153,13 +153,6 @@ const SearchBar = () => {
             )}
 
           </div>
-
-          <button className='primary_btn h-full w-[40px]'>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-full">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-          </svg>
-
-          </button>
         </form>
 
       </div>

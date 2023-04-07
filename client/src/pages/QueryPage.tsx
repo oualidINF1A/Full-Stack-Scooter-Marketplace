@@ -26,6 +26,7 @@ const QueryPage = () => {
         setLoading(true)
         const res = await axios.get(`/advert/query/${query}/${city}`)
         if(!res.data.succes) return
+        setCurrSort('nieuw')
         setLoading(false)
         setAdverts(res.data.adverts)
         if(res.data.adverts.length > 0){
