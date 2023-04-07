@@ -121,7 +121,8 @@ const SearchBar = () => {
       <div className=' w-[90%] lg:hidden lg:text-sm text-xs flex flex-col'>
         {cityError && <ErrorMessage text='Ongeldige stad' />}
 
-        <div className='w-full flex items-end rounded-md min-w-fit'>
+        <form className='w-full flex items-end rounded-md min-w-fit'
+        onSubmit={handleSearch}>
           <input placeholder='Welk soort scooter ben je op zoek?' 
           className='w-full  rounded-none outline-indigo-500 border border-indigo-500
           h-[40px] px-2 rounded-l-full'
@@ -159,7 +160,7 @@ const SearchBar = () => {
           </svg>
 
           </button>
-        </div>
+        </form>
 
       </div>
     </>
