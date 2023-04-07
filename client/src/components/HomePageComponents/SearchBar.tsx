@@ -121,16 +121,18 @@ const SearchBar = () => {
       <div className=' w-[90%] lg:hidden lg:text-sm text-xs flex flex-col'>
         {cityError && <ErrorMessage text='Ongeldige stad' />}
 
-        <div className='w-full flex items-end rounded-md'>
+        <div className='w-full flex items-end rounded-md min-w-fit'>
           <input placeholder='Welk soort scooter ben je op zoek?' 
           className='w-full  rounded-none outline-indigo-500 border border-indigo-500
           h-[40px] px-2 rounded-l-full'
+          inputMode='search'
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           />
 
           <div className='md:w-[165px]'>
-            <input 
+            <input
+            inputMode='search'
               className={'outline-indigo-500 border-y border-indigo-500 h-[40px] pl-1 border-t border-r border-b  rounded-none'}
               value={city} onChange={onCityChange}
               placeholder="Stad"
@@ -151,7 +153,7 @@ const SearchBar = () => {
 
           </div>
 
-          <button className='primary_btn h-full'>
+          <button className='primary_btn h-full w-[40px]'>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-full">
             <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
           </svg>
