@@ -20,7 +20,7 @@ const HulpEnInfoPage = () => {
       <p>We hopen dat deze informatie u zal helpen bij het succesvol verkopen van uw tweedehands scooter. Als u nog vragen heeft, aarzel dan niet om contact met ons op te nemen. Wij staan klaar om u te helpen bij elke stap van het proces.</p> <br/>
 
       <p>Voor verdere vragen of als u meer informatie nodig heeft, kunt u altijd contact met ons opnemen via ons e-mailadres:</p>
-      <a href="mailto:email@example.com" className='text-indigo-500 underline'>email@example.com</a>
+      <a href="mailto:email@example.com" className='text-indigo-500 underline'>scooterscoutter@gmail.com</a>
 
       <p>Ons team staat altijd klaar om u te helpen en uw vragen te beantwoorden. Aarzel niet om contact met ons op te nemen, we helpen u graag verder.</p>
       </div>

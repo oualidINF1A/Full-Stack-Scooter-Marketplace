@@ -149,7 +149,7 @@ export const AdvertPage = () => {
         if(!user?._id || !advert?._id) return
         if(typeof bid === 'string') return
         const {data} = await axios.post(`/berichten/newmessage/${channel}`, {message:`
-Beste Jan,\n
+Beste ${advert.owner.name},\n
 
 hierbij bied ik ${
 new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' }).format(bid)} op uw "${advert.title}".\n

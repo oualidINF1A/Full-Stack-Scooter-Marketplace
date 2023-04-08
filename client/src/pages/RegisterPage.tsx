@@ -89,7 +89,7 @@ const RegisterPage = () => {
     
 
   return (
-    <div className='w-[100vw] h-[100vh] flex flex-col justify-center items-center -mt-8  fixed'>
+    <div className='w-[100vw] h-[100vh] flex flex-col items-center -mt-32  fixed'>
         <form className='bg-white rounded-2xl p-8 md:min-w-[500px] min-w-[350px] flex flex-col gap-2'
         onSubmit={(e) => handleRegister(e)}
         >

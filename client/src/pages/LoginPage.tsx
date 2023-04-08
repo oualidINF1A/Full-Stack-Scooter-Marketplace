@@ -59,7 +59,7 @@ const LoginPage = () => {
 
 
   return (
-    <div className='w-[100vw] h-[100vh] flex flex-col justify-center items-center -mt-28 fixed'>
+    <div className='w-[100vw] flex flex-col -mt-28 items-center - fixed'>
             <form className='bg-white rounded-2xl p-8 md:min-w-[500px] min-w-[350px] flex flex-col gap-2'>
 
                     <h1 className='text-4xl font-bold mb-4'>Inloggen</h1>
