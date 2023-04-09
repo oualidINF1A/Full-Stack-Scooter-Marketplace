@@ -182,8 +182,11 @@ ${user.name}.
     )
 
     if(!user._id) return (
-        <div className='flex justify-center items-center mt-32 text-lg font-bold'>
+        <div className='flex flex-col gap-2x justify-center items-center mt-32 text-lg font-bold'>
             Je moet ingelogd zijn om deze pagina te kunnen bekijken.
+            <button className='primary_btn'
+            onClick={() => {navigate('/login')}}
+            >Log in</button>
         </div>
     )
 
